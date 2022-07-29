@@ -6,10 +6,8 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 html {
-  line-height: 1.15;
-  /* 1 */
-  -webkit-text-size-adjust: 100%;
-  /* 2 */
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
 }
 
 /* Sections
@@ -44,12 +42,9 @@ h1 {
  * 2. Show the overflow in Edge and IE.
  */
 hr {
-  box-sizing: content-box;
-  /* 1 */
-  height: 0;
-  /* 1 */
-  overflow: visible;
-  /* 2 */
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
 }
 
 /**
@@ -57,10 +52,8 @@ hr {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 pre {
-  font-family: monospace, monospace;
-  /* 1 */
-  font-size: 1em;
-  /* 2 */
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
 }
 
 /* Text-level semantics
@@ -77,12 +70,9 @@ a {
  * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
  */
 abbr[title] {
-  border-bottom: none;
-  /* 1 */
-  text-decoration: underline;
-  /* 2 */
-  text-decoration: underline dotted;
-  /* 2 */
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
 }
 
 /**
@@ -100,10 +90,8 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace;
-  /* 1 */
-  font-size: 1em;
-  /* 2 */
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
 }
 
 /**
@@ -153,14 +141,10 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: inherit;
-  /* 1 */
-  font-size: 100%;
-  /* 1 */
-  line-height: 1.15;
-  /* 1 */
-  margin: 0;
-  /* 2 */
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
 }
 
 /**
@@ -168,8 +152,7 @@ textarea {
  * 1. Show the overflow in Edge.
  */
 button,
-input {
-  /* 1 */
+input { /* 1 */
   overflow: visible;
 }
 
@@ -178,8 +161,7 @@ input {
  * 1. Remove the inheritance of text transform in Firefox.
  */
 button,
-select {
-  /* 1 */
+select { /* 1 */
   text-transform: none;
 }
 
@@ -228,18 +210,12 @@ fieldset {
  *    `fieldset` elements in all browsers.
  */
 legend {
-  box-sizing: border-box;
-  /* 1 */
-  color: inherit;
-  /* 2 */
-  display: table;
-  /* 1 */
-  max-width: 100%;
-  /* 1 */
-  padding: 0;
-  /* 3 */
-  white-space: normal;
-  /* 1 */
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
 }
 
 /**
@@ -262,10 +238,8 @@ textarea {
  */
 [type=checkbox],
 [type=radio] {
-  box-sizing: border-box;
-  /* 1 */
-  padding: 0;
-  /* 2 */
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
 }
 
 /**
@@ -281,10 +255,8 @@ textarea {
  * 2. Correct the outline style in Safari.
  */
 [type=search] {
-  -webkit-appearance: textfield;
-  /* 1 */
-  outline-offset: -2px;
-  /* 2 */
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
 }
 
 /**
@@ -299,10 +271,8 @@ textarea {
  * 2. Change font properties to `inherit` in Safari.
  */
 ::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  /* 1 */
-  font: inherit;
-  /* 2 */
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
 }
 
 /* Interactive
@@ -360,11 +330,11 @@ html {
  * Basic styles for links
  */
 a {
-  color: #e50050;
+  color: #D04F4F;
   text-decoration: none;
 }
 a:hover, a:active, a:focus {
-  color: #222222;
+  color: rgb(34, 34, 34);
   text-decoration: underline;
 }
 
@@ -372,7 +342,7 @@ a:hover, a:active, a:focus {
  * Basic typography style for copy text
  */
 body {
-  color: #222222;
+  color: rgb(34, 34, 34);
   font: normal 125%/1.4 "Open Sans", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
@@ -392,18 +362,12 @@ body {
  * 3. Leave some space on the edges, especially valuable on small screens
  */
 .container {
-  max-width: 1180px;
-  /* 1 */
-  margin-left: auto;
-  /* 2 */
-  margin-right: auto;
-  /* 2 */
-  padding-left: 20px;
-  /* 3 */
-  padding-right: 20px;
-  /* 3 */
-  width: 100%;
-  /* 1 */
+  max-width: 1440px; /* 1 */
+  margin-left: auto; /* 2 */
+  margin-right: auto; /* 2 */
+  padding-left: 20px; /* 3 */
+  padding-right: 20px; /* 3 */
+  width: 100%; /* 1 */
 }
 
 /**
@@ -413,8 +377,7 @@ body {
  */
 .hide-text {
   overflow: hidden;
-  padding: 0;
-  /* 1 */
+  padding: 0; /* 1 */
   text-indent: 101%;
   white-space: nowrap;
 }
@@ -435,4 +398,291 @@ body {
   width: 1px;
 }
 
-/*# sourceMappingURL=css/style.css.map */
+body header {
+  display: flex;
+  flex-direction: column;
+}
+body header #banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body header #banner img {
+  width: 51px;
+}
+body header #banner h1 {
+  font-family: DM Sans;
+  font-weight: 700;
+  font-size: 2.25em;
+  color: #D04F4F;
+  margin: 0;
+  vertical-align: top;
+  text-align: center;
+}
+body header nav {
+  width: 100%;
+  margin-top: 1.1em;
+}
+body header nav #searchbar {
+  width: 100%;
+  height: 69px;
+  background-color: #E7E7E7;
+  border-radius: 5px;
+}
+body header nav #searchbar input {
+  width: 100%;
+  height: 100%;
+  background-color: #E7E7E7;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 0 1em;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+body header nav #searchbar input::placeholder {
+  color: rgb(181, 180, 181);
+}
+body header nav #searchbar input:focus::placeholder {
+  color: transparent;
+}
+body header nav #searchbar button {
+  position: absolute;
+  right: 100px;
+  height: 69px;
+  width: 69px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+body header nav #searchbar button i {
+  font-size: 32px;
+}
+body header nav #filters {
+  margin-top: 1.55em;
+  display: flex;
+  gap: 1.25em;
+}
+body header nav #filters div {
+  min-width: 170px;
+  max-width: 840px;
+  height: 69px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+body header nav #filters div .input_field {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+body header nav #filters div .input_field input {
+  display: flex;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  color: white !important;
+  padding: 0 0.5em;
+}
+body header nav #filters div .input_field input::placeholder {
+  font-family: "Lato", DM Sans;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.35em;
+  list-style: none;
+  color: white;
+  text-align: left;
+}
+body header nav #filters div .input_field input:focus::placeholder {
+  color: transparent;
+}
+body header nav #filters div .input_field i {
+  position: absolute;
+  right: 5%;
+  top: 35%;
+  color: white;
+}
+body header nav #filters div ul {
+  z-index: 5;
+  list-style: none;
+  display: none;
+  column-count: 3;
+  margin-top: -4px;
+  padding: 1em;
+}
+body header nav #filters div ul li {
+  font-family: "Lato", DM Sans;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 22px;
+  color: white;
+  text-align: left;
+  width: auto;
+  margin: 7px 0;
+  padding: 5px 0;
+  transition: all 0.25s ease-in-out;
+}
+body header nav #filters div ul li:hover {
+  filter: brightness(0.1);
+  cursor: pointer;
+}
+body header nav #filters #ingredients {
+  background-color: #3282F7;
+}
+body header nav #filters #ingredients:hover > .ingredient {
+  display: block;
+}
+body header nav #filters #ingredients .ingredient {
+  background-color: #3282F7;
+}
+body header nav #filters #ingredients .ingredient li {
+  background-color: #3282F7;
+}
+body header nav #filters #ingredients .ingredient li:hover {
+  filter: brightness(1.25);
+}
+body header nav #filters #appliances {
+  background-color: #68D9A4;
+}
+body header nav #filters #appliances:hover > .appliance {
+  display: block;
+}
+body header nav #filters #appliances .appliance {
+  background-color: #68D9A4;
+}
+body header nav #filters #appliances .appliance li {
+  background-color: #68D9A4;
+}
+body header nav #filters #appliances .appliance li:hover {
+  filter: brightness(1.25);
+}
+body header nav #filters #ustensils {
+  background-color: #ED6454;
+}
+body header nav #filters #ustensils:hover > .ustensil {
+  display: block;
+}
+body header nav #filters #ustensils .ustensil {
+  background-color: #ED6454;
+}
+body header nav #filters #ustensils .ustensil li {
+  background-color: #ED6454;
+}
+body header nav #filters #ustensils .ustensil li:hover {
+  filter: brightness(1.25);
+}
+
+body {
+  max-width: 1440px;
+  margin: 42px 50px;
+}
+body main {
+  margin-top: 82px;
+}
+body main section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 50px;
+}
+body main section .card {
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  height: 364px;
+  border-radius: 5px;
+  width: 380px;
+  transition: 500ms;
+}
+body main section .card:hover {
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.2), 3px 3px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+body main section .card img {
+  height: 178px;
+  width: 380px;
+  background-color: gray;
+  border-radius: 5px 5px 0 0;
+}
+body main section .card .card_content {
+  height: 186px;
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  background-color: #E7E7E7;
+  padding: 20px;
+  border-radius: 0 0 5px 5px;
+}
+body main section .card .card_content header {
+  display: flex;
+  flex-direction: revert;
+  align-items: center;
+  justify-content: space-between;
+}
+body main section .card .card_content header h2 {
+  font-family: "Lato";
+  font-style: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: left;
+  vertical-align: top;
+  margin: 0;
+}
+body main section .card .card_content header .time {
+  display: flex;
+  justify-content: space-between;
+}
+body main section .card .card_content header .time i, body main section .card .card_content header .time p {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: left;
+  vertical-align: top;
+  margin: 0;
+}
+body main section .card .card_content header .time p {
+  margin-left: 0.45em;
+  font-weight: bold;
+}
+body main section .card .card_content .informations {
+  display: flex;
+  flex-direction: row;
+}
+body main section .card .card_content .informations .ingredients {
+  width: 50%;
+}
+body main section .card .card_content .informations .ingredients ul {
+  padding: 0;
+  margin: 1.15em 0;
+}
+body main section .card .card_content .informations .ingredients ul li {
+  list-style: none;
+  font-family: "Lato";
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: left;
+  vertical-align: top;
+}
+body main section .card .card_content .informations .description {
+  width: 50%;
+}
+body main section .card .card_content .informations .description p {
+  margin: 2em 0;
+  font-family: "Roboto";
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  text-align: left;
+  vertical-align: top;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/*# sourceMappingURL=style.css.map */

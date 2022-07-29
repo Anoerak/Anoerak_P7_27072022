@@ -24,19 +24,27 @@ $text-color: rgb(34, 34, 34) !default;
 
 /// Main brand color
 /// @type Color
-$brand-color: rgb(229, 0, 80) !default;
+$red-color: #D04F4F !default;
 
 /// Light grey
 /// @type Color
-$light-grey: rgb(237, 237, 237) !default;
+$light-grey: #E7E7E7 !default;
 
-/// Medium grey
+/// Placeholder Grey
 /// @type Color
-$mid-grey: rgb(153, 153, 153) !default;
+$placeholder-grey: rgb(181, 180, 181) !default;
 
-/// Dark grey
+/// Ingredients color
 /// @type Color
-$dark-grey: rgb(68, 68, 68) !default;
+$ingredients-color: #3282F7 !default;
+
+/// Appliances color
+/// @type Color
+$appliances-color: #68D9A4 !default;
+
+/// Ustensils color
+/// @type Color
+$ustensils-color: #ED6454 !default;
 
 
 
@@ -44,7 +52,7 @@ $dark-grey: rgb(68, 68, 68) !default;
 
 /// Container's maximum width
 /// @type Length
-$max-width: 1180px !default;
+$max-width: 1440px !default;
 
 
 

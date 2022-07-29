@@ -1,0 +1,182 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the header of the site/application.
+// -----------------------------------------------------------------------------
+body {
+    & header {
+        display: flex;
+        flex-direction: column;
+        & #banner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            & img {
+                width: 51px;
+            }
+            & h1 {
+                font-family: DM Sans;
+                font-weight: 700;
+                font-size: 2.25em;
+                color: $red-color;
+                margin: 0;
+                vertical-align: top;
+                text-align: center;
+            }
+        }
+        & nav {
+            width: 100%;
+            margin-top: 1.1em;
+            & #searchbar {
+                width: 100%;
+                height: 69px;
+                background-color: $light-grey;
+                border-radius: 5px;    
+                & input {
+                    width: 100%;
+                    height: 100%;
+                    background-color: $light-grey;
+                    border: none;
+                    outline: none;
+                    border-radius: 5px;
+                    padding: 0 1em;
+                    font-family: 'Lato', sans-serif;
+                    font-weight: 400;
+                    font-size: 18px;
+                    &::placeholder {
+                        color: $placeholder-grey;
+                    }
+                    &:focus::placeholder {
+                        color: transparent;
+                    }
+                }
+                & button {
+                    position: absolute;
+                    right: 100px;
+                    height: 69px;
+                    width: 69px;
+                    border: none;
+                    outline: none;
+                    background-color: transparent;
+                    cursor: pointer;
+                    & i {
+                        font-size: 32px;
+                    }
+                }
+            }
+            & #filters {
+                margin-top: 1.55em;
+                display: flex;
+                gap: 1.25em;
+                & div {
+                    min-width: 170px;
+                    max-width: 840px;
+                    height: 69px;
+                    border: none;
+                    outline: none;
+                    border-radius: 5px;
+                    & .input_field {
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+                        & input {
+                            display: flex;
+                            border: none;
+                            outline: none;
+                            width: 100%;
+                            height: 100%;
+                            background-color: transparent;
+                            color: white !important;
+                            padding: 0 0.5em;
+                            &::placeholder {
+                                font-family: 'Lato', DM Sans;
+                                font-weight: 700;
+                                font-size: 18px;
+                                line-height: 1.35em;
+                                list-style: none;
+                                color: white;
+                                text-align: left;
+                            }
+                            &:focus::placeholder {
+                                color: transparent;
+                            }
+                        }
+                        & i {
+                            position: absolute;
+                            right: 5%;
+                            top: 35%;
+                            color: white;
+                        }
+                    }
+                    & ul {
+                        z-index: 5;
+                        list-style: none;
+                        display: none;
+                        column-count: 3;
+                        margin-top: -4px;
+                        padding: 1em;
+                        & li {
+                            font-family: 'Lato', DM Sans;
+                            font-weight: 300;
+                            font-size: 16px;
+                            line-height: 22px;
+                            color: white;
+                            text-align: left;
+                            width: auto;
+                            margin: 7px 0;
+                            padding: 5px 0;
+                            transition: all 0.25s ease-in-out;
+                            &:hover {
+                                filter: brightness(0.1);
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+                & #ingredients {
+                    background-color: $ingredients-color;
+                    &:hover > .ingredient {
+                        display: block;
+                    }
+                    & .ingredient {
+                        background-color: $ingredients-color;
+                        & li {
+                            background-color: $ingredients-color;
+                            &:hover {
+                                filter: brightness(1.25);
+                            }
+                        }
+                    }
+                }
+                & #appliances {
+                    background-color: $appliances-color;
+                    &:hover > .appliance {
+                        display: block;
+                    }
+                    & .appliance {
+                        background-color: $appliances-color;
+                        & li {
+                            background-color: $appliances-color;
+                            &:hover {
+                                filter: brightness(1.25);
+                            }
+                        }
+                    }
+                }
+                & #ustensils {
+                    background-color: $ustensils-color;
+                    &:hover > .ustensil {
+                        display: block;
+                    }
+                    & .ustensil {
+                        background-color: $ustensils-color;
+                        & li {
+                            background-color: $ustensils-color;
+                            &:hover {
+                                filter: brightness(1.25);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
