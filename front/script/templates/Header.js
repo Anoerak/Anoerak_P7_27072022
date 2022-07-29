@@ -1,6 +1,10 @@
 class Header {
     constructor(datas) {
         this._datas = datas;
+        console.log(this._datas);
+        this._ingredients = datas[0].ingredients;
+        this._ustensils = datas[0].ustensils;
+        this._appliance = datas[0].appliances;
 
         this.$headerWrapper= document.querySelector('header');
     }
@@ -30,7 +34,7 @@ class Header {
                         <input id="ingredient_input"type="text" placeholder="Ingrédients"><i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <ul class="ingredient">
-                        ${this.createIngredientsTags().innerHTML}
+                        ${this.createTags(this._ingredients, 'ingredients').innerHTML}
                     </ul>    
                 </div>
                 <div id="appliances">
@@ -38,7 +42,7 @@ class Header {
                         <input id="appliance_input" type="text" placeholder="Appareils"><i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <ul class="appliance">
-                        ${this.createAppliancesTags().innerHTML}
+                        ${this.createTags(this._appliance, 'appliance').innerHTML}
                     </ul>    
                 </div>
                 <div id="ustensils">
@@ -46,7 +50,7 @@ class Header {
                         <input id="ustensils_input" type="text" placeholder="Ustensils"><i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <ul class="ustensil">
-                        ${this.createUstensilsTags().innerHTML}
+                        ${this.createTags(this._ustensils, 'ustensils').innerHTML}
                     </ul>    
                 </div>
             </div>
@@ -54,47 +58,63 @@ class Header {
     }
 
     // Displays the Tags
-    createIngredientsTags() {
-        const newIngredientsTagsModel = new TagsModel(this._datas);
-        const ingredientsTags = newIngredientsTagsModel.getIngredients();
-        this.$ingredientsTagsWrapper = document.createElement('ul');
-        ingredientsTags.forEach(element => {
+    createTags(data, key) {
+        const newTagsModel = new TagsModel(this._datas);
+        const tags = newTagsModel.getTags(data, key);
+        this.$tagsWrapper = document.createElement('ul');
+        tags.forEach(element => {
             const li = document.createElement('li');
             li.innerHTML = `
                 ${element}
             `;
-            this.$ingredientsTagsWrapper.appendChild(li);
+            this.$tagsWrapper.appendChild(li);
         });
-        return this.$ingredientsTagsWrapper;
+        return this.$tagsWrapper;
     }
 
-    createAppliancesTags() {
-        const newAppliancesTagsModel = new TagsModel(this._datas);
-        const appliancesTags = newAppliancesTagsModel.getAppliance();
-        this.$appliancesTagsWrapper = document.createElement('ul');
-        appliancesTags.forEach(element => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-                ${element}
-            `;
-            this.$appliancesTagsWrapper.appendChild(li);
-        });
-        return this.$appliancesTagsWrapper;
-    }
 
-    createUstensilsTags() {
-        const newUstensilsTagsModel = new TagsModel(this._datas);
-        const ustensilsTags = newUstensilsTagsModel.getUstensils();
-        this.$ustensilsTagsWrapper = document.createElement('ul');
-        ustensilsTags.forEach(element => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-                ${element}
-            `;
-            this.$ustensilsTagsWrapper.appendChild(li);
-        });
-        return this.$ustensilsTagsWrapper;
-    }
+
+    // createIngredientsTags() {
+    //     const newIngredientsTagsModel = new TagsModel(this._datas);
+    //     const ingredientsTags = newIngredientsTagsModel.getIngredients();
+    //     this.$ingredientsTagsWrapper = document.createElement('ul');
+    //     ingredientsTags.forEach(element => {
+    //         const li = document.createElement('li');
+    //         li.innerHTML = `
+    //             ${element}
+    //         `;
+    //         this.$ingredientsTagsWrapper.appendChild(li);
+    //     });
+    //     return this.$ingredientsTagsWrapper;
+    // }
+
+    // createAppliancesTags() {
+    //     const newAppliancesTagsModel = new TagsModel(this._datas);
+    //     const appliancesTags = newAppliancesTagsModel.getAppliance();
+    //     this.$appliancesTagsWrapper = document.createElement('ul');
+    //     appliancesTags.forEach(element => {
+    //         const li = document.createElement('li');
+    //         li.innerHTML = `
+    //             ${element}
+    //         `;
+    //         this.$appliancesTagsWrapper.appendChild(li);
+    //     });
+    //     return this.$appliancesTagsWrapper;
+    // }
+
+    // createUstensilsTags() {
+    //     const newUstensilsTagsModel = new TagsModel(this._datas);
+    //     const ustensilsTags = newUstensilsTagsModel.getUstensils();
+    //     this.$ustensilsTagsWrapper = document.createElement('ul');
+    //     ustensilsTags.forEach(element => {
+    //         const li = document.createElement('li');
+    //         li.innerHTML = `
+    //             ${element}
+    //         `;
+    //         this.$ustensilsTagsWrapper.appendChild(li);
+    //     });
+    //     return this.$ustensilsTagsWrapper;
+    // }
 
     init() {
         this.displayHeader();

@@ -28,6 +28,8 @@ class Index {
     async init() {
         const myDatas = await this.getRecipes();
         this.displayDatas(myDatas);
+        const filters = new TagFilter();
+        filters.init();
         console.log("mes données :",myDatas);
     }
 }

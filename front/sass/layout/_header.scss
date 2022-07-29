@@ -107,31 +107,40 @@ body {
                         }
                     }
                     & ul {
-                        z-index: 5;
                         list-style: none;
                         display: none;
                         column-count: 3;
                         margin-top: -4px;
                         padding: 1em;
                         & li {
+                            border-radius:10px;
                             font-family: 'Lato', DM Sans;
                             font-weight: 300;
                             font-size: 16px;
                             line-height: 22px;
                             color: white;
                             text-align: left;
-                            width: auto;
-                            margin: 7px 0;
-                            padding: 5px 0;
+                            width: 100%;
+                            height: 40px;
+                            margin-bottom: 5px;
+                            padding: 5px;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap; 
                             transition: all 0.25s ease-in-out;
                             &:hover {
                                 filter: brightness(0.1);
                                 cursor: pointer;
+                                text-overflow: initial;
+                                overflow: initial;
+                                height: 50px;
+                                overflow-wrap: break-word;
                             }
                         }
                     }
                 }
                 & #ingredients {
+                    z-index: 5;
                     background-color: $ingredients-color;
                     &:hover > .ingredient {
                         display: block;
@@ -141,12 +150,15 @@ body {
                         & li {
                             background-color: $ingredients-color;
                             &:hover {
+                                width: 100%;
+                                height: 100%;
                                 filter: brightness(1.25);
                             }
                         }
                     }
                 }
                 & #appliances {
+                    z-index: 5;
                     background-color: $appliances-color;
                     &:hover > .appliance {
                         display: block;
@@ -156,12 +168,15 @@ body {
                         & li {
                             background-color: $appliances-color;
                             &:hover {
+                                width: 100%;
+                                height: 100%;
                                 filter: brightness(1.25);
                             }
                         }
                     }
                 }
                 & #ustensils {
+                    z-index: 5;
                     background-color: $ustensils-color;
                     &:hover > .ustensil {
                         display: block;
@@ -171,6 +186,8 @@ body {
                         & li {
                             background-color: $ustensils-color;
                             &:hover {
+                                width: 100%;
+                                height: 100%;
                                 filter: brightness(1.25);
                             }
                         }

@@ -507,7 +507,6 @@ body header nav #filters div .input_field i {
   color: white;
 }
 body header nav #filters div ul {
-  z-index: 5;
   list-style: none;
   display: none;
   column-count: 3;
@@ -515,22 +514,32 @@ body header nav #filters div ul {
   padding: 1em;
 }
 body header nav #filters div ul li {
+  border-radius: 10px;
   font-family: "Lato", DM Sans;
   font-weight: 300;
   font-size: 16px;
   line-height: 22px;
   color: white;
   text-align: left;
-  width: auto;
-  margin: 7px 0;
-  padding: 5px 0;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 5px;
+  padding: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   transition: all 0.25s ease-in-out;
 }
 body header nav #filters div ul li:hover {
   filter: brightness(0.1);
   cursor: pointer;
+  text-overflow: initial;
+  overflow: initial;
+  height: 50px;
+  overflow-wrap: break-word;
 }
 body header nav #filters #ingredients {
+  z-index: 5;
   background-color: #3282F7;
 }
 body header nav #filters #ingredients:hover > .ingredient {
@@ -543,9 +552,12 @@ body header nav #filters #ingredients .ingredient li {
   background-color: #3282F7;
 }
 body header nav #filters #ingredients .ingredient li:hover {
+  width: 100%;
+  height: 100%;
   filter: brightness(1.25);
 }
 body header nav #filters #appliances {
+  z-index: 5;
   background-color: #68D9A4;
 }
 body header nav #filters #appliances:hover > .appliance {
@@ -558,9 +570,12 @@ body header nav #filters #appliances .appliance li {
   background-color: #68D9A4;
 }
 body header nav #filters #appliances .appliance li:hover {
+  width: 100%;
+  height: 100%;
   filter: brightness(1.25);
 }
 body header nav #filters #ustensils {
+  z-index: 5;
   background-color: #ED6454;
 }
 body header nav #filters #ustensils:hover > .ustensil {
@@ -573,6 +588,8 @@ body header nav #filters #ustensils .ustensil li {
   background-color: #ED6454;
 }
 body header nav #filters #ustensils .ustensil li:hover {
+  width: 100%;
+  height: 100%;
   filter: brightness(1.25);
 }
 
@@ -587,10 +604,10 @@ body main section {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 50px;
+  gap: 40px;
 }
 body main section .card {
-  z-index: -1;
+  z-index: 0;
   display: flex;
   flex-direction: column;
   height: 364px;
