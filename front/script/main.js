@@ -16,21 +16,23 @@ class Index {
     // Displays the Datas on the DOM
     async displayDatas(datas) {
         // Displays the Skeleton and Header of the Application
-        const newHeader = new Header(datas);
-        newHeader.init();
+            const newHeader = new Header(datas);
+            newHeader.init();
 
-        // Displays and Filters the Recipes
-        const recipesFactory = new RecipeFactory(datas);
-        recipesFactory;
+        // Displays the List of Tags when Click on the Input/Hide the List when Clicking anywhere else
+            const displayTagsList = new TagsListFunctions();
+            displayTagsList.displayList();
+
+        // Displays All the Recipes
+            const newRecipesFilter = new RecipesFilter(datas[0].recettes);
+            newRecipesFilter.loadAllRecipes();
     }
 
     // Initializes the Application
     async init() {
         const myDatas = await this.getRecipes();
+
         this.displayDatas(myDatas);
-        const filters = new TagFilter();
-        filters.init();
-        console.log("mes données :",myDatas);
     }
 }
 

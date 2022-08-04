@@ -2,14 +2,13 @@
 // This file contains styles that are specific to the home page.
 // -----------------------------------------------------------------------------
 body{
-    max-width: $max-width;
     margin: 42px 50px;
     & main {
         margin-top: 82px;
         & section {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: flex-start;
             gap: 40px;
             & .card {
                 z-index: 0;
@@ -31,7 +30,7 @@ body{
                 }
                 & .card_content {
                     height: 186px;
-                    width: 380px;
+                    width: 340px;
                     display: flex;
                     flex-direction: column;
                     background-color: #E7E7E7;

@@ -3,21 +3,17 @@
 // -----------------------------------------------------------------------------
 body {
     & header {
-        display: flex;
-        flex-direction: column;
         & #banner {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            @include flex-column-center;
             & img {
                 width: 51px;
             }
             & h1 {
-                font-family: DM Sans;
-                font-weight: 700;
-                font-size: 2.25em;
-                color: $red-color;
                 margin: 0;
+                color: $red-color;
+                font-family: DM Sans, sans-serif;
+                font-weight: bold;
+                font-size: 2.25em;
                 vertical-align: top;
                 text-align: center;
             }
@@ -29,44 +25,69 @@ body {
                 width: 100%;
                 height: 69px;
                 background-color: $light-grey;
-                border-radius: 5px;    
+                border-radius: 5px; 
                 & input {
-                    width: 100%;
+                    @include font-lato-400;
+                    width: 97%;
                     height: 100%;
+                    background: url('../../assets/images/search_icon.svg') no-repeat right center;
+                    background-size: 3rem;
+                    background-position: 98% 50%;
                     background-color: $light-grey;
                     border: none;
                     outline: none;
                     border-radius: 5px;
                     padding: 0 1em;
-                    font-family: 'Lato', sans-serif;
-                    font-weight: 400;
-                    font-size: 18px;
                     &::placeholder {
                         color: $placeholder-grey;
+                        font-family: 'Lato';
                     }
                     &:focus::placeholder {
                         color: transparent;
                     }
                 }
-                & button {
-                    position: absolute;
-                    right: 100px;
-                    height: 69px;
-                    width: 69px;
-                    border: none;
-                    outline: none;
-                    background-color: transparent;
-                    cursor: pointer;
+            }
+            & .selected_tags {
+                display: flex;
+                align-items: flex-start;
+                flex-wrap: wrap;
+                width: 100%;
+                & span {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    width: auto;
+                    color: white;
+                    padding: 0.25em 0.75em;
+                    border-radius: 15px;
+                    font-size: 14px;
+                    margin: 1em;
                     & i {
-                        font-size: 32px;
+                        margin-left: 1em;
+                        &:hover {
+                            cursor: pointer;
+                        }
                     }
                 }
+                & .tag_ingredient {
+                    background-color: $ingredients-color;
+                }
+                & .tag_appliance {
+                    background-color: $appliances-color;
+                }
+                & .tag_ustensil {
+                    background-color: $ustensils-color;
+                }
+            }
+            & .hidden {
+                display: none;
             }
             & #filters {
                 margin-top: 1.55em;
                 display: flex;
                 gap: 1.25em;
                 & div {
+                    z-index: 5;
                     min-width: 170px;
                     max-width: 840px;
                     height: 69px;
@@ -87,9 +108,7 @@ body {
                             color: white !important;
                             padding: 0 0.5em;
                             &::placeholder {
-                                font-family: 'Lato', DM Sans;
-                                font-weight: 700;
-                                font-size: 18px;
+                                @include font-lato-400;
                                 line-height: 1.35em;
                                 list-style: none;
                                 color: white;
@@ -121,7 +140,7 @@ body {
                             color: white;
                             text-align: left;
                             width: 100%;
-                            height: 40px;
+                            height: 20px;
                             margin-bottom: 5px;
                             padding: 5px;
                             text-overflow: ellipsis;
@@ -129,69 +148,23 @@ body {
                             white-space: nowrap; 
                             transition: all 0.25s ease-in-out;
                             &:hover {
-                                filter: brightness(0.1);
+                                filter: brightness(1.25);
                                 cursor: pointer;
                                 text-overflow: initial;
                                 overflow: initial;
-                                height: 50px;
                                 overflow-wrap: break-word;
                             }
                         }
                     }
                 }
-                & #ingredients {
-                    z-index: 5;
+                & #ingredients, #ingredients .ingredients, #ingredients .ingredients li {
                     background-color: $ingredients-color;
-                    &:hover > .ingredient {
-                        display: block;
-                    }
-                    & .ingredient {
-                        background-color: $ingredients-color;
-                        & li {
-                            background-color: $ingredients-color;
-                            &:hover {
-                                width: 100%;
-                                height: 100%;
-                                filter: brightness(1.25);
-                            }
-                        }
-                    }
                 }
-                & #appliances {
-                    z-index: 5;
+                & #appliances, #appliances .appliances, #appliances .appliances li {
                     background-color: $appliances-color;
-                    &:hover > .appliance {
-                        display: block;
-                    }
-                    & .appliance {
-                        background-color: $appliances-color;
-                        & li {
-                            background-color: $appliances-color;
-                            &:hover {
-                                width: 100%;
-                                height: 100%;
-                                filter: brightness(1.25);
-                            }
-                        }
-                    }
                 }
-                & #ustensils {
-                    z-index: 5;
+                & #ustensils, #ustensils .ustensils, #ustensils .ustensils li {
                     background-color: $ustensils-color;
-                    &:hover > .ustensil {
-                        display: block;
-                    }
-                    & .ustensil {
-                        background-color: $ustensils-color;
-                        & li {
-                            background-color: $ustensils-color;
-                            &:hover {
-                                width: 100%;
-                                height: 100%;
-                                filter: brightness(1.25);
-                            }
-                        }
-                    }
                 }
             }
         }

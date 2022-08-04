@@ -32,3 +32,17 @@
   }
 }
 
+/// Give a Text all the Fonts Parameters in One
+@mixin font-lato-400 {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+
+/// Get a Flex Column Center
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
