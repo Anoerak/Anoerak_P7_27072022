@@ -2,17 +2,19 @@ class TagsFilter {
     constructor() {
         this.$tagsInputList = document.querySelectorAll('.input_area');
         this.$tagsList = document.querySelectorAll('li');
+        this.$selectedTagsList = document.querySelectorAll('.fa-circle-xmark');
 
         this.$tagsList.forEach(element => {
             element.addEventListener('click', this.handleClick.bind(this));
+        });
+        this.$selectedTagsList.forEach(element => {
+            element.addEventListener('click', this.removeTag.bind(this));
         });
     }
 
     handleClick(tag) {
         if (tag !== undefined) {
-            // Refresh the Tags List Based on the New Recipes
-
-            
+            console.log(tag);
             // Stores the Tag Family and Name into an array
             this._selectedTagsArray.push(this.collectAndStoredTagDatas(tag));
 
@@ -25,6 +27,28 @@ class TagsFilter {
             recipesFilter.loadFilteredRecipesByTags(this._recipes, this._selectedTagsArray);
         }
     }
+
+
+    removeTag(data) {
+        data.target.parentNode.remove();
+        let tagsDatasArray = [];
+        document.querySelectorAll('.selected_tag').forEach(element => {
+            let tagDatas = {
+                family: element.firstElementChild.classList[0],
+                name: element.firstElementChild.classList[1]
+            }
+            tagsDatasArray.push(tagDatas);
+        });
+        if (data.length > 0) {
+            console.log(data);
+        } else {
+            console.log('No Tags Selected');
+        }
+    }
+
+
+
+
     
     // Collect Tag's Infos (Family, Name) and return it
     collectAndStoredTagDatas(data) {

@@ -17,8 +17,8 @@ class RecipesFilter {
     loadAllRecipes() {
         this.displayRecipes(this._recipes);
         // Initiate the Searchbar Filter
-            const newSearchbarFilter = new SearchbarFilter();
-            newSearchbarFilter.init(this._recipes);
+            // const newSearchbarFilter = new SearchbarFilter(this._recipes);
+            // newSearchbarFilter.init();
         // Initiate the Tags Filter
             const newTagsFilter = new TagsFilter();
             newTagsFilter.init(this._recipes);
