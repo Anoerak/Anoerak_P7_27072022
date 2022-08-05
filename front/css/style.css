@@ -48,7 +48,7 @@ body header nav #searchbar input {
   font-size: 18px;
   width: 97%;
   height: 100%;
-  background: url("../../assets/images/search_icon.svg") no-repeat right center;
+  background: url("../assets/images/search_icon.svg") no-repeat right center;
   background-size: 3rem;
   background-position: 98% 50%;
   background-color: #E7E7E7;
