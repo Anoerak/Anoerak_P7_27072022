@@ -20,8 +20,8 @@ class RecipesFilter {
             const newSearchbarFilter = new SearchbarFilter(this._recipes);
             newSearchbarFilter.init();
         // Initiate the Tags Filter
-            // const newTagsFilter = new TagsFilter();
-            // newTagsFilter.init(this._recipes);
+            const newTagsFilter = new TagsFilter();
+            newTagsFilter.init(this._recipes);
     }
 
     loadFilteredRecipesByTags(recipes, tags) {
@@ -73,12 +73,15 @@ class RecipesFilter {
                 let ustensilsTemp = recipe.ustensils.map(ustensil => ustensil.toLowerCase());
                 let ingredientsTemp = recipe.ingredients.map(ingredient => ingredient);
                 const newTagTemplate = new TagTemplate();
+                let datasAppliances = [...new Set(datas[0].appliances)];
+                let datasUstensils = [...new Set(datas[0].ustensils)];
+                let datasIngredients = [...new Set(datas[0].ingredients)];
                 this.createNewTagsList(applianceTemp, datas[0].appliances, filters);
-                newTagTemplate.displayNewTagsList(datas[0].ingredients, 'ingredients', 'ingredient');
+                newTagTemplate.displayNewTagsList(datasIngredients, 'ingredients', 'ingredient');
                 this.createNewTagsList(ustensilsTemp, datas[0].ustensils, filters);
-                newTagTemplate.displayNewTagsList(datas[0].appliances, 'appliances', 'appliance');
+                newTagTemplate.displayNewTagsList(datasAppliances, 'appliances', 'appliance');
                 this.createNewTagsList(ingredientsTemp, datas[0].ingredients, filters);
-                newTagTemplate.displayNewTagsList(datas[0].ustensils, 'ustensils', 'ustensil');
+                newTagTemplate.displayNewTagsList(datasUstensils, 'ustensils', 'ustensil');
             });    
         } else {
             document.querySelector('.ingredients').innerHTML = '';
@@ -93,11 +96,13 @@ class RecipesFilter {
                 resultsArray.push(item);
                 resultsArray.sort();
             }
-            filters.forEach(filter => {
-                if (filter.name === item) {
-                    resultsArray.splice(resultsArray.indexOf(filter.name), 1);
-                }
-            });
+            if (filters.length > 0) {
+                filters.forEach(filter => {
+                    if (filter.name === item) {
+                        resultsArray.splice(resultsArray.indexOf(filter.name), 1);
+                    }
+                });
+            }
         });
     }
 }

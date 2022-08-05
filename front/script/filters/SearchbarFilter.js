@@ -18,19 +18,32 @@ class SearchbarFilter {
         this.$gallery.innerHTML = '';
         const recipesFilter = new RecipesFilter();
         recipesFilter.displayRecipes(this._recipes);
+        recipesFilter.refreshTagsLists(this._recipes, []);
     }
 
     searchFunction(recipes) {
         const searchValue = this.$searchbar.value.toLowerCase();
-        const filteredRecipesByTitles = recipes.filter(recipe => recipe.name.toLowerCase().includes(searchValue));
-        const filteredRecipesByIngredients = recipes.filter(recipe => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchValue)));
-        const filteredRecipesByDescription = recipes.filter(recipe => recipe.description.toLowerCase().includes(searchValue));
-        const filteredRecipesConcat = filteredRecipesByTitles.concat(filteredRecipesByIngredients, filteredRecipesByDescription);
-        const filteredRecipes = [...new Set(filteredRecipesConcat)];
+        let filteredRecipesPull = [];
+
+        for (let i = 0; i < recipes.length; i++) {
+            if (recipes[i].name.toLowerCase().includes(searchValue)) {
+                filteredRecipesPull.push(recipes[i]);
+            } else if (recipes[i].ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchValue))) {
+                filteredRecipesPull.push(recipes[i]);
+            } else if (recipes[i].description.toLowerCase().includes(searchValue)) {
+                filteredRecipesPull.push(recipes[i]);
+            }
+        }
+
+        const filteredRecipes = [...new Set(filteredRecipesPull)];
+        
         this.$gallery.innerHTML = '';
         if (filteredRecipes.length > 0) {
             const recipesFilter = new RecipesFilter(filteredRecipes);
             recipesFilter.displayRecipes(filteredRecipes);
+            recipesFilter.refreshTagsLists(filteredRecipes, []);
+            const newTagsFilter = new TagsFilter();
+            newTagsFilter.init(filteredRecipes);
         } else {
             const recipesCardTemplate = new RecipeCardTemplate();
             recipesCardTemplate.createNoRecipesFound();

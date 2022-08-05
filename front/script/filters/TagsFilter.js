@@ -25,6 +25,10 @@ class TagsFilter {
             // Display the Recipes based on the selected Tags
             let recipesFilter = new RecipesFilter(this._recipes);
             recipesFilter.loadFilteredRecipesByTags(this._recipes, this._selectedTagsArray);
+
+            // Initialize the Searchbar Filter
+            let searchbarFilter = new SearchbarFilter(this._recipes);
+            searchbarFilter.init();
         }
     }
 
