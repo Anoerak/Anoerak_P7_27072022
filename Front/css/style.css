@@ -1,0 +1,298 @@
+/**
+ * Set up a decent box model on the root element
+ */
+html {
+  box-sizing: border-box;
+  margin: auto;
+  max-width: 1440px;
+}
+
+p {
+  font-family: "Lato", "DM Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "DM Sans", sans-serif;
+}
+
+body header #banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body header #banner img {
+  width: 51px;
+}
+body header #banner h1 {
+  margin: 0;
+  color: #D04F4F;
+  font-family: DM Sans, sans-serif;
+  font-weight: bold;
+  font-size: 2.25em;
+  vertical-align: top;
+  text-align: center;
+}
+body header nav {
+  width: 100%;
+  margin-top: 1.1em;
+}
+body header nav #searchbar {
+  width: 100%;
+  height: 69px;
+  background-color: #E7E7E7;
+  border-radius: 5px;
+}
+body header nav #searchbar input {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  width: 97%;
+  height: 100%;
+  background: url("../assets/images/search_icon.svg") no-repeat right center;
+  background-size: 3rem;
+  background-position: 98% 50%;
+  background-color: #E7E7E7;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 0 1em;
+}
+body header nav #searchbar input::placeholder {
+  color: rgb(181, 180, 181);
+  font-family: "Lato";
+}
+body header nav #searchbar input:focus::placeholder {
+  color: transparent;
+}
+body header nav .selected_tags {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+body header nav .selected_tags span {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: auto;
+  color: white;
+  padding: 0.25em 0.75em;
+  border-radius: 15px;
+  font-size: 14px;
+  margin: 1em;
+}
+body header nav .selected_tags span i {
+  margin-left: 1em;
+}
+body header nav .selected_tags span i:hover {
+  cursor: pointer;
+}
+body header nav .selected_tags .tag_ingredient {
+  background-color: #3282F7;
+}
+body header nav .selected_tags .tag_appliance {
+  background-color: #68D9A4;
+}
+body header nav .selected_tags .tag_ustensil {
+  background-color: #ED6454;
+}
+body header nav .hidden {
+  display: none;
+}
+body header nav #filters {
+  margin-top: 1.55em;
+  display: flex;
+  gap: 1.25em;
+}
+body header nav #filters div {
+  z-index: 5;
+  min-width: 170px;
+  max-width: 840px;
+  height: 69px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+body header nav #filters div .input_field {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+body header nav #filters div .input_field input {
+  display: flex;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  color: white !important;
+  padding: 0 0.5em;
+}
+body header nav #filters div .input_field input::placeholder {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.35em;
+  list-style: none;
+  color: white;
+  text-align: left;
+}
+body header nav #filters div .input_field input:focus::placeholder {
+  color: transparent;
+}
+body header nav #filters div .input_field i {
+  position: absolute;
+  right: 5%;
+  top: 35%;
+  color: white;
+}
+body header nav #filters div ul {
+  list-style: none;
+  display: none;
+  column-count: 3;
+  margin-top: -4px;
+  padding: 1em;
+}
+body header nav #filters div ul li {
+  border-radius: 10px;
+  font-family: "Lato", DM Sans;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 22px;
+  color: white;
+  text-align: left;
+  width: 100%;
+  height: 20px;
+  margin-bottom: 5px;
+  padding: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all 0.25s ease-in-out;
+}
+body header nav #filters div ul li:hover {
+  filter: brightness(1.25);
+  cursor: pointer;
+  text-overflow: initial;
+  overflow: initial;
+  overflow-wrap: break-word;
+}
+body header nav #filters #ingredients, body header nav #filters #ingredients .ingredients, body header nav #filters #ingredients .ingredients li {
+  background-color: #3282F7;
+}
+body header nav #filters #appliances, body header nav #filters #appliances .appliances, body header nav #filters #appliances .appliances li {
+  background-color: #68D9A4;
+}
+body header nav #filters #ustensils, body header nav #filters #ustensils .ustensils, body header nav #filters #ustensils .ustensils li {
+  background-color: #ED6454;
+}
+
+body {
+  margin: 42px 50px;
+}
+body main {
+  margin-top: 82px;
+}
+body main section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 40px;
+}
+body main section .card {
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  height: 364px;
+  border-radius: 5px;
+  width: 380px;
+  transition: 500ms;
+}
+body main section .card:hover {
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.2), 3px 3px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+body main section .card img {
+  height: 178px;
+  width: 380px;
+  background-color: gray;
+  border-radius: 5px 5px 0 0;
+}
+body main section .card .card_content {
+  height: 186px;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  background-color: #E7E7E7;
+  padding: 20px;
+  border-radius: 0 0 5px 5px;
+}
+body main section .card .card_content header {
+  display: flex;
+  flex-direction: revert;
+  align-items: center;
+  justify-content: space-between;
+}
+body main section .card .card_content header h2 {
+  font-family: "Lato";
+  font-style: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: left;
+  vertical-align: top;
+  margin: 0;
+}
+body main section .card .card_content header .time {
+  display: flex;
+  justify-content: space-between;
+}
+body main section .card .card_content header .time i, body main section .card .card_content header .time p {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: left;
+  vertical-align: top;
+  margin: 0;
+}
+body main section .card .card_content header .time p {
+  margin-left: 0.45em;
+  font-weight: bold;
+}
+body main section .card .card_content .informations {
+  display: flex;
+  flex-direction: row;
+}
+body main section .card .card_content .informations .ingredients {
+  width: 50%;
+}
+body main section .card .card_content .informations .ingredients ul {
+  padding: 0;
+  margin: 1.15em 0;
+}
+body main section .card .card_content .informations .ingredients ul li {
+  list-style: none;
+  font-family: "Lato";
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: left;
+  vertical-align: top;
+}
+body main section .card .card_content .informations .description {
+  width: 50%;
+}
+body main section .card .card_content .informations .description p {
+  margin: 2em 0;
+  font-family: "Roboto";
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  text-align: left;
+  vertical-align: top;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/*# sourceMappingURL=style.css.map */

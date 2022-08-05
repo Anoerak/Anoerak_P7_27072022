@@ -1,0 +1,110 @@
+// -----------------------------------------------------------------------------
+// This file contains styles that are specific to the home page.
+// -----------------------------------------------------------------------------
+body{
+    margin: 42px 50px;
+    & main {
+        margin-top: 82px;
+        & section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 40px;
+            & .card {
+                z-index: 0;
+                display: flex;
+                flex-direction: column;
+                height: 364px;
+                border-radius: 5px;
+                width: 380px;
+                transition: 500ms;
+                &:hover {
+                    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.20),3px 3px 12px rgba(0, 0, 0, 0.10);
+                    cursor: pointer;
+                }
+                & img {
+                    height: 178px;
+                    width: 380px;
+                    background-color: gray;
+                    border-radius: 5px 5px 0 0;
+                }
+                & .card_content {
+                    height: 186px;
+                    width: 340px;
+                    display: flex;
+                    flex-direction: column;
+                    background-color: #E7E7E7;
+                    padding: 20px;
+                    border-radius: 0 0 5px 5px;
+                    & header {
+                        display: flex;
+                        flex-direction: revert;
+                        align-items: center;
+                        justify-content: space-between;
+                        & h2 {
+                            font-family: 'Lato';
+                            font-style: normal;
+                            font-size: 18px;
+                            line-height: 22px;
+                            text-align: left;
+                            vertical-align: top;
+                            margin: 0;
+                        }
+                        & .time {
+                            display: flex;
+                            justify-content: space-between;
+                            & i, p {
+                                font-weight: 400;
+                                font-size: 18px;
+                                line-height: 22px;
+                                text-align: left;
+                                vertical-align: top;
+                                margin: 0;
+                            }
+                            & p {
+                                margin-left: 0.45em;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                    & .informations {
+                        display: flex;
+                        flex-direction: row;
+                        & .ingredients{
+                            width: 50%;
+                            & ul {
+                                padding: 0;
+                                margin: 1.15em 0;
+                                & li{
+                                    list-style: none;
+                                    font-family: 'Lato';
+                                    font-weight: normal;
+                                    font-size: 12px;
+                                    line-height: 14px;
+                                    text-align: left;
+                                    vertical-align: top;
+                                }
+                            }
+                        }
+                        & .description {
+                            width: 50%;
+                            & p {
+                                margin: 2em 0;
+                                font-family: 'Roboto';
+                                font-weight: normal;
+                                font-size: 12px;
+                                line-height: 12px;
+                                text-align: left;
+                                vertical-align: top;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 6;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
