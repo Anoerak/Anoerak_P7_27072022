@@ -1,36 +1,43 @@
 class TagsFilter {
     constructor() {
         this.$tagsInputList = document.querySelectorAll('.input_area');
-        this.$tagsList = document.querySelectorAll('li');
         this.$selectedTagsList = document.querySelectorAll('.fa-circle-xmark');
 
-        this.$tagsList.forEach(element => {
-            element.addEventListener('click', this.handleClick.bind(this));
-        });
         this.$selectedTagsList.forEach(element => {
             element.addEventListener('click', this.removeTag.bind(this));
         });
     }
 
-    handleClick(tag) {
-        if (tag !== undefined) {
-            console.log(tag);
-            // Stores the Tag Family and Name into an array
-            this._selectedTagsArray.push(this.collectAndStoredTagDatas(tag));
-
-            // Displays the Selected Tag from the _selectedTagArray into the Tag Div
-            let displaySelectedTag = new TagTemplate(this.collectAndStoredTagDatas(tag));
-            displaySelectedTag.init();
-
-            // Display the Recipes based on the selected Tags
-            let recipesFilter = new RecipesFilter(this._recipes);
-            recipesFilter.loadFilteredRecipesByTags(this._recipes, this._selectedTagsArray);
-
-            // Initialize the Searchbar Filter
-            let searchbarFilter = new SearchbarFilter(this._recipes);
-            searchbarFilter.init();
-        }
+    handleClick(recipes, tags) {
+        this.$tagsList = document.querySelectorAll('li');
+        this.$tagsList.forEach(element => {
+            element.addEventListener('click', () => {
+                if (tags !== undefined) {
+                    // Stores the Tag Family and Name into an array
+                    tags.push(this.collectAndStoredTagDatas(element));
+        
+                    // Displays the Selected Tag from the _selectedTagArray into the Tag Div
+                    let displaySelectedTag = new TagTemplate(this.collectAndStoredTagDatas(element));
+                    displaySelectedTag.init();
+        
+                    // Display the Recipes based on the selected Tags
+                    let recipesFilter = new RecipesFilter(recipes);
+                    recipesFilter.loadFilteredRecipesByTags(recipes, tags);        
+                }            
+            });
+        });
     }
+
+    init(data, tags) {
+        this._recipes = data;
+        this._selectedTagsArray = [];
+        if (tags !== undefined) {
+            this._selectedTagsArray = tags;
+        };
+        this.handleClick(this._recipes, this._selectedTagsArray);
+        this.eventOnTagInput();
+    }
+
 
 
     removeTag(data) {
@@ -56,10 +63,10 @@ class TagsFilter {
     
     // Collect Tag's Infos (Family, Name) and return it
     collectAndStoredTagDatas(data) {
-        if (data.target.classList.contains('ingredient') || data.target.classList.contains('ustensil') || data.target.classList.contains('appliance')) {
+        if (data.classList.contains('ingredient') || data.classList.contains('ustensil') || data.classList.contains('appliance')) {
             const tagDatas = {
-                name: data.target.innerText,
-                family: data.target.className
+                name: data.innerText,
+                family: data.className
             };
             return tagDatas;
         } else {
@@ -94,7 +101,7 @@ class TagsFilter {
             appliances: [],
             ustensils: []
         }];
-        if (filteredRecipesTag.length > 1) {
+        if (filteredRecipesTag.length > 0) {
             filteredRecipesTag.forEach(recipe => {
                 let applianceTemp = recipe.appliances.split(',');
                 let ustensilsTemp = recipe.ustensils.map(ustensil => ustensil.toLowerCase());
@@ -103,17 +110,31 @@ class TagsFilter {
                 let datasAppliances = [...new Set(datas[0].appliances)];
                 let datasUstensils = [...new Set(datas[0].ustensils)];
                 let datasIngredients = [...new Set(datas[0].ingredients)];
-                this.createNewTagsList(applianceTemp, datas[0].appliances, filters);
-                newTagTemplate.displayNewTagsList(datasIngredients, 'ingredients', 'ingredient');
-                this.createNewTagsList(ustensilsTemp, datas[0].ustensils, filters);
-                newTagTemplate.displayNewTagsList(datasAppliances, 'appliances', 'appliance');
+
+                document.querySelector('.ingredients').style.columnCount = '3';
                 this.createNewTagsList(ingredientsTemp, datas[0].ingredients, filters);
+                newTagTemplate.displayNewTagsList(datasIngredients, 'ingredients', 'ingredient');
+
+                document.querySelector('.ustensils').style.columnCount = '3';
+                this.createNewTagsList(ustensilsTemp, datas[0].ustensils, filters);
                 newTagTemplate.displayNewTagsList(datasUstensils, 'ustensils', 'ustensil');
+
+                document.querySelector('.appliances').style.columnCount = '3';
+                this.createNewTagsList(applianceTemp, datas[0].appliances, filters);
+                newTagTemplate.displayNewTagsList(datasAppliances, 'appliances', 'appliance');
+
             });    
         } else {
+            const newTagTemplate = new TagTemplate();
+            document.querySelector('.ingredients').style.columnCount = '1';
             document.querySelector('.ingredients').innerHTML = '';
+            document.querySelector('.ingredients').appendChild(newTagTemplate.displayNoTagsFound());
+            document.querySelector('.appliances').style.columnCount = '1';
             document.querySelector('.appliances').innerHTML = '';
+            document.querySelector('.appliances').appendChild(newTagTemplate.displayNoTagsFound());
+            document.querySelector('.ustensils').style.columnCount = '1';
             document.querySelector('.ustensils').innerHTML = '';
+            document.querySelector('.ustensils').appendChild(newTagTemplate.displayNoTagsFound());
         }
     }
 
@@ -133,12 +154,4 @@ class TagsFilter {
         });
     }
 
-    init(data, tags) {
-        this._recipes = data;
-        this._selectedTagsArray = [];
-        if (tags !== undefined) {
-            this._selectedTagsArray = tags;
-        };
-        this.eventOnTagInput();
-    }
 }

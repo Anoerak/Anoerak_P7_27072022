@@ -32,6 +32,15 @@ class TagTemplate {
         this.$ingredientsUlWrapper = document.querySelector('.'+filters);
         this.$ingredientsUlWrapper.innerHTML = array.map(element => `<li class="${value}">${element}</li>`).join('');
     }
+
+    displayNoTagsFound() {
+        const noTagsFound = document.createElement('span');
+        noTagsFound.classList.add('no_tags_found');
+        noTagsFound.innerHTML = `
+            <p>Aucun(s) filtre(s) pour cette recherche...</p>
+        `;
+        return noTagsFound;
+    }
     
     init() {
         this.createTagDiv();

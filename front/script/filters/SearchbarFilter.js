@@ -48,6 +48,8 @@ class SearchbarFilter {
         } else {
             const recipesCardTemplate = new RecipeCardTemplate();
             recipesCardTemplate.createNoRecipesFound();
+            const newTagsFilter = new TagsFilter();
+            newTagsFilter.refreshTagsLists(filteredRecipes, []);
             this.$gallery.appendChild(recipesCardTemplate.createNoRecipesFound());
         }
     }

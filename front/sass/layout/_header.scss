@@ -156,6 +156,14 @@ body {
                                 overflow-wrap: break-word;
                             }
                         }
+                        & span {
+                            width: 100%;
+                            margin: 0;
+                            & p {
+                                margin: 0;
+                                color: white;
+                            }
+                        }
                     }
                 }
                 & #ingredients, #ingredients .ingredients, #ingredients .ingredients li {

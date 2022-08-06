@@ -1,8 +1,6 @@
 class RecipesFilter {
     constructor(recipes) {
         this._recipes = recipes;
-        this._filteredRecipes = [];
-        this._filteredRecipesTag = [];
         this.$recipeGalleryWrapper = document.querySelector('#recipes_gallery');
     }
     
@@ -25,22 +23,42 @@ class RecipesFilter {
     }
 
     loadFilteredRecipesByTags(recipes, tags) {
-        // Create an Array with all the Recipes' Tags based on recipes parameter
-            let RecipesTagsMix = recipes.map(recipe => { return {id: recipe.id, tags: `${recipe.appliance},${recipe.ustensils},${recipe.ingredients.map(ingredient => ingredient.ingredient)}`}});
-            let recipesTags = RecipesTagsMix.map(recipe => { return {id: recipe.id, tags: recipe.tags.toLowerCase()}});
-        // Look for a match between the selected Tags and the Recipes' Tags based on their IDs
-            if (tags.length > 0) {
-                let selectedTag = [];
-                selectedTag.push(tags[tags.length -1]);
-                this.filterRecipesByTags(recipes, recipesTags, selectedTag);
-            } else {
-                this.filterRecipesByTags(recipes, recipesTags, tags);
-            }
-        // Refresh the Tags' Lists
+        console.log("recettes: ", recipes);
+        console.log("tags: ", tags);
+
+        this._filteredRecipes = [];
+
+        recipes.forEach(recipe => {
+            tags.forEach(tag => {
+                if (tag.family === "ustensil") {
+                    if (recipe.ustensils.includes(tag.name)) {
+                        this._filteredRecipes.push(recipe);
+                    }
+                } else if (tag.family === "ingredient") {
+                    if (recipe.ingredients.some(ingredient => ingredient.ingredient === tag.name)) {
+                        this._filteredRecipes.push(recipe);
+                    }
+                } else if (tag.family === "category") {
+                    if (recipe.category === tag.name) {
+                        this._filteredRecipes.push(recipe);
+                    }
+                }
+            });
+        });
+
+        this.$recipeGalleryWrapper.innerHTML = '';
+
+        // Initiate the Tags Filter
             const newTagsFilter = new TagsFilter();
-            newTagsFilter.refreshTagsLists(this._filteredRecipes[0], tags);
-        // Reinitialize the Tag Filter with the new Recipes
-            newTagsFilter.init(this._filteredRecipes[0], this._filteredRecipesTag[0], this._recipes);
+            newTagsFilter.init(this._filteredRecipes);
+            newTagsFilter.refreshTagsLists(this._filteredRecipes, tags);
+        
+        // Initiate the Searchbar Filter
+            const newSearchbarFilter = new SearchbarFilter(this._filteredRecipes);
+            newSearchbarFilter.init();
+
+        // Initiate the Tags Filter
+            newTagsFilter.init(this._filteredRecipes);
     }
 
     filterRecipesByTags(recipes, recipesTags, tags) {
@@ -60,49 +78,4 @@ class RecipesFilter {
         });
     };
 
-    // refreshTagsLists(array, filters) {
-    //     let filteredRecipesTag = array.map(recipe => { return {id: recipe.id, appliances: recipe.appliance, ustensils: recipe.ustensils, ingredients: recipe.ingredients.map(ingredient => ingredient.ingredient)}});
-    //     let datas = [{
-    //         ingredients: [],
-    //         appliances: [],
-    //         ustensils: []
-    //     }];
-    //     if (filteredRecipesTag.length > 1) {
-    //         filteredRecipesTag.forEach(recipe => {
-    //             let applianceTemp = recipe.appliances.split(',');
-    //             let ustensilsTemp = recipe.ustensils.map(ustensil => ustensil.toLowerCase());
-    //             let ingredientsTemp = recipe.ingredients.map(ingredient => ingredient);
-    //             const newTagTemplate = new TagTemplate();
-    //             let datasAppliances = [...new Set(datas[0].appliances)];
-    //             let datasUstensils = [...new Set(datas[0].ustensils)];
-    //             let datasIngredients = [...new Set(datas[0].ingredients)];
-    //             this.createNewTagsList(applianceTemp, datas[0].appliances, filters);
-    //             newTagTemplate.displayNewTagsList(datasIngredients, 'ingredients', 'ingredient');
-    //             this.createNewTagsList(ustensilsTemp, datas[0].ustensils, filters);
-    //             newTagTemplate.displayNewTagsList(datasAppliances, 'appliances', 'appliance');
-    //             this.createNewTagsList(ingredientsTemp, datas[0].ingredients, filters);
-    //             newTagTemplate.displayNewTagsList(datasUstensils, 'ustensils', 'ustensil');
-    //         });    
-    //     } else {
-    //         document.querySelector('.ingredients').innerHTML = '';
-    //         document.querySelector('.appliances').innerHTML = '';
-    //         document.querySelector('.ustensils').innerHTML = '';
-    //     }
-    // }
-
-    // createNewTagsList(originalArray, resultsArray, filters) {
-    //     originalArray.forEach(item => {
-    //         if (!resultsArray.includes(item.toLowerCase())) {
-    //             resultsArray.push(item);
-    //             resultsArray.sort();
-    //         }
-    //         if (filters.length > 0) {
-    //             filters.forEach(filter => {
-    //                 if (filter.name === item) {
-    //                     resultsArray.splice(resultsArray.indexOf(filter.name), 1);
-    //                 }
-    //             });
-    //         }
-    //     });
-    // }
 }
