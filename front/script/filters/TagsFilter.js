@@ -25,6 +25,10 @@ class TagsFilter {
             // Display the Recipes based on the selected Tags
             let recipesFilter = new RecipesFilter(this._recipes);
             recipesFilter.loadFilteredRecipesByTags(this._recipes, this._selectedTagsArray);
+
+            // Initialize the Searchbar Filter
+            let searchbarFilter = new SearchbarFilter(this._recipes);
+            searchbarFilter.init();
         }
     }
 
@@ -80,6 +84,52 @@ class TagsFilter {
                     }
                 );
             });
+        });
+    }
+
+    refreshTagsLists(array, filters) {
+        let filteredRecipesTag = array.map(recipe => { return {id: recipe.id, appliances: recipe.appliance, ustensils: recipe.ustensils, ingredients: recipe.ingredients.map(ingredient => ingredient.ingredient)}});
+        let datas = [{
+            ingredients: [],
+            appliances: [],
+            ustensils: []
+        }];
+        if (filteredRecipesTag.length > 1) {
+            filteredRecipesTag.forEach(recipe => {
+                let applianceTemp = recipe.appliances.split(',');
+                let ustensilsTemp = recipe.ustensils.map(ustensil => ustensil.toLowerCase());
+                let ingredientsTemp = recipe.ingredients.map(ingredient => ingredient);
+                const newTagTemplate = new TagTemplate();
+                let datasAppliances = [...new Set(datas[0].appliances)];
+                let datasUstensils = [...new Set(datas[0].ustensils)];
+                let datasIngredients = [...new Set(datas[0].ingredients)];
+                this.createNewTagsList(applianceTemp, datas[0].appliances, filters);
+                newTagTemplate.displayNewTagsList(datasIngredients, 'ingredients', 'ingredient');
+                this.createNewTagsList(ustensilsTemp, datas[0].ustensils, filters);
+                newTagTemplate.displayNewTagsList(datasAppliances, 'appliances', 'appliance');
+                this.createNewTagsList(ingredientsTemp, datas[0].ingredients, filters);
+                newTagTemplate.displayNewTagsList(datasUstensils, 'ustensils', 'ustensil');
+            });    
+        } else {
+            document.querySelector('.ingredients').innerHTML = '';
+            document.querySelector('.appliances').innerHTML = '';
+            document.querySelector('.ustensils').innerHTML = '';
+        }
+    }
+
+    createNewTagsList(originalArray, resultsArray, filters) {
+        originalArray.forEach(item => {
+            if (!resultsArray.includes(item.toLowerCase())) {
+                resultsArray.push(item);
+                resultsArray.sort();
+            }
+            if (filters.length > 0) {
+                filters.forEach(filter => {
+                    if (filter.name === item) {
+                        resultsArray.splice(resultsArray.indexOf(filter.name), 1);
+                    }
+                });
+            }
         });
     }
 

@@ -86,10 +86,11 @@ body {
                 margin-top: 1.55em;
                 display: flex;
                 gap: 1.25em;
-                & div {
+                max-width: 840px;
+                & .tagList_container {
                     z-index: 5;
                     min-width: 170px;
-                    max-width: 840px;
+                    max-width: 850px;
                     height: 69px;
                     border: none;
                     outline: none;

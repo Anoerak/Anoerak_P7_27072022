@@ -27,27 +27,27 @@ class Header {
                 <input id="searchbar_input" type="text" placeholder="Rechercher une recette">
             </div>
             <div id="filters">
-                <div id="ingredients">
+                <div id="ingredients" class="tagList_container">
                     <div class="input_field">
                         <input class="input_area" id="ingredients_input" type="text" placeholder="Ingrédients"><i class="fa-solid fa-chevron-down input_ingredients_down"></i><i class="fa-solid fa-chevron-up hidden"></i>
                     </div>
-                    <ul class="ingredients">
+                    <ul class="ingredients ul_taglist">
                         ${this.createTags(this._ingredients, 'ingredients').innerHTML}
                     </ul>    
                 </div>
-                <div id="appliances">
+                <div id="appliances" class="tagList_container">
                     <div class="input_field">
                         <input class="input_area" id="appliances_input" type="text" placeholder="Appareils"><i class="fa-solid fa-chevron-down input_appliances_down"></i><i class="fa-solid fa-chevron-up hidden"></i>
                     </div>
-                    <ul class="appliances">
+                    <ul class="appliances ul_taglist">
                         ${this.createTags(this._appliance, 'appliance').innerHTML}
                     </ul>    
                 </div>
-                <div id="ustensils">
+                <div id="ustensils" class="tagList_container">
                     <div class="input_field">
                         <input class="input_area" id="ustensils_input" type="text" placeholder="Ustensils"><i class="fa-solid fa-chevron-down input_ustensils_down"></i><i class="fa-solid fa-chevron-up hidden"></i>
                     </div>
-                    <ul class="ustensils">
+                    <ul class="ustensils ul_taglist">
                         ${this.createTags(this._ustensils, 'ustensils').innerHTML}
                     </ul>    
                 </div>

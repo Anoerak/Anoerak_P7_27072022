@@ -61,4 +61,14 @@ class RecipeCardTemplate {
         });
         return this.$ingredientsListWrapper;
     }
+
+    createNoRecipesFound() {
+        const noRecipesFound = document.createElement('div');
+        noRecipesFound.classList.add('no_recipes_found');
+        noRecipesFound.innerHTML = `
+            <p>Aucune recette ne correspond à votre critère... <br>
+            vous pouvez chercher « tarte aux pommes », « poisson », etc.</p>
+        `;
+        return noRecipesFound;
+    }
 }
