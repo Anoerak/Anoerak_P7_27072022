@@ -16,8 +16,10 @@ class SearchbarFilter {
 
     searchReset() {
         this.$gallery.innerHTML = '';
+        
         const recipesFilter = new RecipesFilter(this._allDatas);
         recipesFilter.displayRecipes(this._recipes);
+
         const newTagsFilter = new TagsFilter(this._allDatas);
         newTagsFilter.init(this._recipes);
         newTagsFilter.refreshTagsLists(this._recipes, []);
