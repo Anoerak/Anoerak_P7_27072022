@@ -3,7 +3,6 @@ class SearchbarFilter {
         this.$gallery = document.querySelector('#recipes_gallery');
         this.$searchbar = document.querySelector('#searchbar_input');
         this.$searchbar.addEventListener('input', this.searchRegex.bind(this));
-
         this._recipes = data;
 
         this.inputRegex = /^[a-zA-Z éèêëàäâïîöôùüûœøæêÀÄÂÉÈËÊÏÎÔÖÙÛÜ-]{3,}$/;
@@ -52,7 +51,7 @@ class SearchbarFilter {
             this.$gallery.appendChild(recipesCardTemplate.createNoRecipesFound());
         }
     }
-
+    
     init() {
         this.searchRegex();
     }
