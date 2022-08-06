@@ -25,7 +25,7 @@ class Index {
 
         // Displays All the Recipes
             const newRecipesFilter = new RecipesFilter(datas[0].recettes);
-            newRecipesFilter.loadAllRecipes();
+            newRecipesFilter.loadAllRecipes(datas[0].recettes);
     }
 
     // Initializes the Application

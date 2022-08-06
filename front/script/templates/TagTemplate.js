@@ -28,12 +28,12 @@ class TagTemplate {
         });
     }
     
-    displayNewTagsList(array, filters, value) {
+    createNewTagsList(array, filters, value) {
         this.$ingredientsUlWrapper = document.querySelector('.'+filters);
         this.$ingredientsUlWrapper.innerHTML = array.map(element => `<li class="${value}">${element}</li>`).join('');
     }
 
-    displayNoTagsFound() {
+    createNoTagsFound() {
         const noTagsFound = document.createElement('span');
         noTagsFound.classList.add('no_tags_found');
         noTagsFound.innerHTML = `

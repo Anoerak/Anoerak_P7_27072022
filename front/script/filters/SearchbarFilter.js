@@ -1,9 +1,10 @@
 class SearchbarFilter {
-    constructor(data) {
+    constructor(data, allDatas) {
         this.$gallery = document.querySelector('#recipes_gallery');
         this.$searchbar = document.querySelector('#searchbar_input');
         this.$searchbar.addEventListener('input', this.searchRegex.bind(this));
         this._recipes = data;
+        this._allDatas = allDatas;
 
         this.inputRegex = /^[a-zA-Z éèêëàäâïîöôùüûœøæêÀÄÂÉÈËÊÏÎÔÖÙÛÜ'()-]{3,}$/;
     }
@@ -15,9 +16,9 @@ class SearchbarFilter {
 
     searchReset() {
         this.$gallery.innerHTML = '';
-        const recipesFilter = new RecipesFilter();
+        const recipesFilter = new RecipesFilter(this._allDatas);
         recipesFilter.displayRecipes(this._recipes);
-        const newTagsFilter = new TagsFilter();
+        const newTagsFilter = new TagsFilter(this._allDatas);
         newTagsFilter.init(this._recipes);
         newTagsFilter.refreshTagsLists(this._recipes, []);
     }
@@ -40,9 +41,9 @@ class SearchbarFilter {
         
         this.$gallery.innerHTML = '';
         if (filteredRecipes.length > 0) {
-            const recipesFilter = new RecipesFilter(filteredRecipes);
+            const recipesFilter = new RecipesFilter(this._allDatas);
             recipesFilter.displayRecipes(filteredRecipes);
-            const newTagsFilter = new TagsFilter();
+            const newTagsFilter = new TagsFilter(this._allDatas);
             newTagsFilter.refreshTagsLists(filteredRecipes, []);
             newTagsFilter.init(filteredRecipes);
         } else {

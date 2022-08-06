@@ -12,22 +12,21 @@ class RecipesFilter {
         });
     }
 
-    loadAllRecipes() {
-        this.displayRecipes(this._recipes);
+    loadAllRecipes(recipes) {
+        this.displayRecipes(recipes);
+
         // Initiate the Searchbar Filter
-            const newSearchbarFilter = new SearchbarFilter(this._recipes);
+            const newSearchbarFilter = new SearchbarFilter(recipes, this._recipes);
             newSearchbarFilter.init();
+
         // Initiate the Tags Filter
-            const newTagsFilter = new TagsFilter();
-            newTagsFilter.init(this._recipes);
+            const newTagsFilter = new TagsFilter(this._recipes);
+            newTagsFilter.init(recipes);
     }
 
     loadFilteredRecipesByTags(recipes, tags) {
-        console.log("recettes: ", recipes);
-        console.log("tags: ", tags);
-
         this._filteredRecipes = [];
-
+        // Filter recipes by tags
         recipes.forEach(recipe => {
             tags.forEach(tag => {
                 if (tag.family === "ustensil") {
@@ -38,8 +37,8 @@ class RecipesFilter {
                     if (recipe.ingredients.some(ingredient => ingredient.ingredient === tag.name)) {
                         this._filteredRecipes.push(recipe);
                     }
-                } else if (tag.family === "category") {
-                    if (recipe.category === tag.name) {
+                } else if (tag.family === "appliance") {
+                    if (recipe.appliance === tag.name) {
                         this._filteredRecipes.push(recipe);
                     }
                 }
@@ -48,34 +47,41 @@ class RecipesFilter {
 
         this.$recipeGalleryWrapper.innerHTML = '';
 
-        // Initiate the Tags Filter
-            const newTagsFilter = new TagsFilter();
-            newTagsFilter.init(this._filteredRecipes);
+        // Refresh the Tags Lists
+            const newTagsFilter = new TagsFilter(this._recipes);
             newTagsFilter.refreshTagsLists(this._filteredRecipes, tags);
-        
-        // Initiate the Searchbar Filter
-            const newSearchbarFilter = new SearchbarFilter(this._filteredRecipes);
-            newSearchbarFilter.init();
 
-        // Initiate the Tags Filter
-            newTagsFilter.init(this._filteredRecipes);
+        this.loadAllRecipes(this._filteredRecipes);
     }
 
-    filterRecipesByTags(recipes, recipesTags, tags) {
-        tags.forEach(tag => {
-            // Create an Array with all the Recipes' Tags based on recipes parameter
-                let filteredRecipesTags = recipesTags.filter(recipe => recipe.tags.includes(tag.name.toLowerCase()));
-            // Create an Array with all the Recipes' Id based on filteredRecipesTags parameter
-                let filteredRecipesId = filteredRecipesTags.map(recipe => recipe.id);
-            // Create an Array with all the Recipes' based on filteredRecipesId parameter
-                let filteredRecipes = recipes.filter(recipe => filteredRecipesId.includes(recipe.id));
-            // Clean Up the Gallery
-                this.$recipeGalleryWrapper.innerHTML = '';
-            // Display the Recipes
-                this.displayRecipes(filteredRecipes);
-                this._filteredRecipes.push(filteredRecipes);
-                this._filteredRecipesTag.push(tags);
-        });
-    };
 
+    loadFilteredRecipesByTags2(recipes, tags) {
+        this._filteredRecipes = [];
+            this._filteredRecipes = recipes.filter(recipe => {
+                return tags.every(tag => {
+                    if (tag.family === "ustensil") {
+                        return recipe.ustensils.includes(tag.name);
+                    } else if (tag.family === "ingredient") {
+                        return recipe.ingredients.some(ingredient => ingredient.ingredient === tag.name);
+                    } else if (tag.family === "appliance") {
+                        return recipe.appliance === tag.name;
+                    }
+                });
+            });
+
+            this.$recipeGalleryWrapper.innerHTML = '';
+
+            let filteredRecipesNoDuplicates = [...new Set(this._filteredRecipes)];
+    
+            this.displayRecipes(filteredRecipesNoDuplicates);
+    
+            // Initiate the Searchbar Filter
+                const newSearchbarFilter = new SearchbarFilter(filteredRecipesNoDuplicates, this._recipes);
+                newSearchbarFilter.init();
+    
+            // Refresh the Tags Lists
+                const newTagsFilter = new TagsFilter(this._recipes);
+                newTagsFilter.refreshTagsLists(filteredRecipesNoDuplicates, tags);
+                newTagsFilter.init(filteredRecipesNoDuplicates);
+    }
 }
