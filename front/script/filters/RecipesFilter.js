@@ -37,9 +37,9 @@ class RecipesFilter {
                 this.filterRecipesByTags(recipes, recipesTags, tags);
             }
         // Refresh the Tags' Lists
-            this.refreshTagsLists(this._filteredRecipes[0], tags);
-        // Reinitialize the Tag Filter with the new Recipes
             const newTagsFilter = new TagsFilter();
+            newTagsFilter.refreshTagsLists(this._filteredRecipes[0], tags);
+        // Reinitialize the Tag Filter with the new Recipes
             newTagsFilter.init(this._filteredRecipes[0], this._filteredRecipesTag[0], this._recipes);
     }
 
@@ -60,49 +60,49 @@ class RecipesFilter {
         });
     };
 
-    refreshTagsLists(array, filters) {
-        let filteredRecipesTag = array.map(recipe => { return {id: recipe.id, appliances: recipe.appliance, ustensils: recipe.ustensils, ingredients: recipe.ingredients.map(ingredient => ingredient.ingredient)}});
-        let datas = [{
-            ingredients: [],
-            appliances: [],
-            ustensils: []
-        }];
-        if (filteredRecipesTag.length > 1) {
-            filteredRecipesTag.forEach(recipe => {
-                let applianceTemp = recipe.appliances.split(',');
-                let ustensilsTemp = recipe.ustensils.map(ustensil => ustensil.toLowerCase());
-                let ingredientsTemp = recipe.ingredients.map(ingredient => ingredient);
-                const newTagTemplate = new TagTemplate();
-                let datasAppliances = [...new Set(datas[0].appliances)];
-                let datasUstensils = [...new Set(datas[0].ustensils)];
-                let datasIngredients = [...new Set(datas[0].ingredients)];
-                this.createNewTagsList(applianceTemp, datas[0].appliances, filters);
-                newTagTemplate.displayNewTagsList(datasIngredients, 'ingredients', 'ingredient');
-                this.createNewTagsList(ustensilsTemp, datas[0].ustensils, filters);
-                newTagTemplate.displayNewTagsList(datasAppliances, 'appliances', 'appliance');
-                this.createNewTagsList(ingredientsTemp, datas[0].ingredients, filters);
-                newTagTemplate.displayNewTagsList(datasUstensils, 'ustensils', 'ustensil');
-            });    
-        } else {
-            document.querySelector('.ingredients').innerHTML = '';
-            document.querySelector('.appliances').innerHTML = '';
-            document.querySelector('.ustensils').innerHTML = '';
-        }
-    }
+    // refreshTagsLists(array, filters) {
+    //     let filteredRecipesTag = array.map(recipe => { return {id: recipe.id, appliances: recipe.appliance, ustensils: recipe.ustensils, ingredients: recipe.ingredients.map(ingredient => ingredient.ingredient)}});
+    //     let datas = [{
+    //         ingredients: [],
+    //         appliances: [],
+    //         ustensils: []
+    //     }];
+    //     if (filteredRecipesTag.length > 1) {
+    //         filteredRecipesTag.forEach(recipe => {
+    //             let applianceTemp = recipe.appliances.split(',');
+    //             let ustensilsTemp = recipe.ustensils.map(ustensil => ustensil.toLowerCase());
+    //             let ingredientsTemp = recipe.ingredients.map(ingredient => ingredient);
+    //             const newTagTemplate = new TagTemplate();
+    //             let datasAppliances = [...new Set(datas[0].appliances)];
+    //             let datasUstensils = [...new Set(datas[0].ustensils)];
+    //             let datasIngredients = [...new Set(datas[0].ingredients)];
+    //             this.createNewTagsList(applianceTemp, datas[0].appliances, filters);
+    //             newTagTemplate.displayNewTagsList(datasIngredients, 'ingredients', 'ingredient');
+    //             this.createNewTagsList(ustensilsTemp, datas[0].ustensils, filters);
+    //             newTagTemplate.displayNewTagsList(datasAppliances, 'appliances', 'appliance');
+    //             this.createNewTagsList(ingredientsTemp, datas[0].ingredients, filters);
+    //             newTagTemplate.displayNewTagsList(datasUstensils, 'ustensils', 'ustensil');
+    //         });    
+    //     } else {
+    //         document.querySelector('.ingredients').innerHTML = '';
+    //         document.querySelector('.appliances').innerHTML = '';
+    //         document.querySelector('.ustensils').innerHTML = '';
+    //     }
+    // }
 
-    createNewTagsList(originalArray, resultsArray, filters) {
-        originalArray.forEach(item => {
-            if (!resultsArray.includes(item.toLowerCase())) {
-                resultsArray.push(item);
-                resultsArray.sort();
-            }
-            if (filters.length > 0) {
-                filters.forEach(filter => {
-                    if (filter.name === item) {
-                        resultsArray.splice(resultsArray.indexOf(filter.name), 1);
-                    }
-                });
-            }
-        });
-    }
+    // createNewTagsList(originalArray, resultsArray, filters) {
+    //     originalArray.forEach(item => {
+    //         if (!resultsArray.includes(item.toLowerCase())) {
+    //             resultsArray.push(item);
+    //             resultsArray.sort();
+    //         }
+    //         if (filters.length > 0) {
+    //             filters.forEach(filter => {
+    //                 if (filter.name === item) {
+    //                     resultsArray.splice(resultsArray.indexOf(filter.name), 1);
+    //                 }
+    //             });
+    //         }
+    //     });
+    // }
 }

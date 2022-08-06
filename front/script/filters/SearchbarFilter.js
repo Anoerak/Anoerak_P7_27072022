@@ -18,7 +18,9 @@ class SearchbarFilter {
         this.$gallery.innerHTML = '';
         const recipesFilter = new RecipesFilter();
         recipesFilter.displayRecipes(this._recipes);
-        recipesFilter.refreshTagsLists(this._recipes, []);
+        const newTagsFilter = new TagsFilter();
+        newTagsFilter.init(this._recipes);
+        newTagsFilter.refreshTagsLists(this._recipes, []);
     }
 
     searchFunction(recipes) {
@@ -41,8 +43,8 @@ class SearchbarFilter {
         if (filteredRecipes.length > 0) {
             const recipesFilter = new RecipesFilter(filteredRecipes);
             recipesFilter.displayRecipes(filteredRecipes);
-            recipesFilter.refreshTagsLists(filteredRecipes, []);
             const newTagsFilter = new TagsFilter();
+            newTagsFilter.refreshTagsLists(filteredRecipes, []);
             newTagsFilter.init(filteredRecipes);
         } else {
             const recipesCardTemplate = new RecipeCardTemplate();
