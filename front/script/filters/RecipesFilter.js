@@ -12,7 +12,7 @@ class RecipesFilter {
         });
     }
 
-    loadAllRecipes(recipes) {
+    loadRecipes(recipes, tags) {
         this.displayRecipes(recipes);
 
         // Initiate the Searchbar Filter
@@ -21,42 +21,20 @@ class RecipesFilter {
 
         // Initiate the Tags Filter
             const newTagsFilter = new TagsFilter(this._recipes);
-            newTagsFilter.init(recipes);
+            if (tags === undefined) {
+                newTagsFilter.init();  
+            } else {
+                newTagsFilter.refreshTagsLists(recipes, tags);
+                newTagsFilter.init();   
+            }
     }
 
     loadFilteredRecipesByTags(recipes, tags) {
         this._filteredRecipes = [];
-        // Filter recipes by tags
-        recipes.forEach(recipe => {
-            tags.forEach(tag => {
-                if (tag.family === "ustensil") {
-                    if (recipe.ustensils.includes(tag.name)) {
-                        this._filteredRecipes.push(recipe);
-                    }
-                } else if (tag.family === "ingredient") {
-                    if (recipe.ingredients.some(ingredient => ingredient.ingredient === tag.name)) {
-                        this._filteredRecipes.push(recipe);
-                    }
-                } else if (tag.family === "appliance") {
-                    if (recipe.appliance === tag.name) {
-                        this._filteredRecipes.push(recipe);
-                    }
-                }
-            });
-        });
-
-        this.$recipeGalleryWrapper.innerHTML = '';
-
-        // Refresh the Tags Lists
-            const newTagsFilter = new TagsFilter(this._recipes);
-            newTagsFilter.refreshTagsLists(this._filteredRecipes, tags);
-
-        this.loadAllRecipes(this._filteredRecipes);
-    }
-
-
-    loadFilteredRecipesByTags2(recipes, tags) {
-        this._filteredRecipes = [];
+        console.log(tags.length);
+        if (tags.length === 0) {
+            this.loadRecipes(recipes, tags);
+        } else {
             this._filteredRecipes = recipes.filter(recipe => {
                 return tags.every(tag => {
                     if (tag.family === "ustensil") {
@@ -73,15 +51,7 @@ class RecipesFilter {
 
             let filteredRecipesNoDuplicates = [...new Set(this._filteredRecipes)];
     
-            this.displayRecipes(filteredRecipesNoDuplicates);
-    
-            // Initiate the Searchbar Filter
-                const newSearchbarFilter = new SearchbarFilter(filteredRecipesNoDuplicates, this._recipes);
-                newSearchbarFilter.init();
-    
-            // Refresh the Tags Lists
-                const newTagsFilter = new TagsFilter(this._recipes);
-                newTagsFilter.refreshTagsLists(filteredRecipesNoDuplicates, tags);
-                newTagsFilter.init(filteredRecipesNoDuplicates);
+            this.loadRecipes(filteredRecipesNoDuplicates, tags);
+        }
     }
 }

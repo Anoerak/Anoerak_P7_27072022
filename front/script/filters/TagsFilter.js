@@ -4,22 +4,22 @@ class TagsFilter {
         this.$tagsInputList = document.querySelectorAll('.input_area');
     }
 
-    handleClick(recipes, tags) {
+    handleClick() {
         this.$tagsList = document.querySelectorAll('li');
         this.$tagsList.forEach(element => {
             element.addEventListener('click', () => {
-                if (tags !== undefined) {
-                    // Stores the Tag Family and Name into an array
-                    tags.push(this.collectAndStoredTagDatas(element));
-        
                     // Displays the Selected Tag from the _selectedTagArray into the Tag Div
                     let displaySelectedTag = new TagTemplate(this.collectAndStoredTagDatas(element));
                     displaySelectedTag.init();
+
+                    let activeTags = [];
+                    document.querySelectorAll('.fa-circle-xmark').forEach(element => {
+                        activeTags.push(this.collectAndStoredTagDatas(element));
+                    });            
         
                     // Display the Recipes based on the selected Tags
                     let recipesFilter = new RecipesFilter(this._allRecipes);
-                    recipesFilter.loadFilteredRecipesByTags(recipes, tags);        
-                }            
+                    recipesFilter.loadFilteredRecipesByTags(this._allRecipes, activeTags);        
             });
         });
     }
@@ -29,6 +29,7 @@ class TagsFilter {
         document.querySelectorAll('.fa-circle-xmark').forEach(element => {
             activeTags.push(this.collectAndStoredTagDatas(element));
         });
+
         document.querySelectorAll('.fa-circle-xmark').forEach(element => {
             element.addEventListener('click', () => {
                 element.parentNode.remove();
@@ -39,7 +40,7 @@ class TagsFilter {
                     }
                 });
                 let recipesFilter = new RecipesFilter(this._allRecipes);
-                recipesFilter.loadFilteredRecipesByTags2(this._allRecipes, activeTags);
+                recipesFilter.loadFilteredRecipesByTags(this._allRecipes, activeTags);
             });
         });
     }
@@ -145,10 +146,8 @@ class TagsFilter {
         document.querySelector(`.${family}`).appendChild(displayNoTagsFound.createNoTagsFound());
     }
 
-    init(data) {
-        this._recipes = data;
-        this._selectedTagsArray = [];
-        this.handleClick(this._recipes, this._selectedTagsArray);
+    init() {
+        this.handleClick();
         this.eventOnTagInput();
         this.removeTag();
     }
