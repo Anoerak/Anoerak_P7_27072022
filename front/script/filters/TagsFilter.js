@@ -4,43 +4,46 @@ class TagsFilter {
         this.$tagsInputList = document.querySelectorAll('.input_area');
     }
 
+    getActiveTags() {
+        let tags = [];
+        document.querySelectorAll('.fa-circle-xmark').forEach(element => {
+            tags.push(this.collectAndStoredTagDatas(element));
+        });
+        return tags;
+    }
+
     handleClick() {
         this.$tagsList = document.querySelectorAll('li');
         this.$tagsList.forEach(element => {
             element.addEventListener('click', () => {
                     // Displays the Selected Tag from the _selectedTagArray into the Tag Div
                     let displaySelectedTag = new TagTemplate(this.collectAndStoredTagDatas(element));
-                    displaySelectedTag.init();
-
-                    let activeTags = [];
-                    document.querySelectorAll('.fa-circle-xmark').forEach(element => {
-                        activeTags.push(this.collectAndStoredTagDatas(element));
-                    });            
+                    displaySelectedTag.init();          
         
                     // Display the Recipes based on the selected Tags
                     let recipesFilter = new RecipesFilter(this._allRecipes);
-                    recipesFilter.loadFilteredRecipesByTags(this._allRecipes, activeTags);        
+                    recipesFilter.loadFilteredRecipesByTags(this._allRecipes, this.getActiveTags());        
             });
         });
     }
 
     removeTag() {
-        let activeTags = [];
-        document.querySelectorAll('.fa-circle-xmark').forEach(element => {
-            activeTags.push(this.collectAndStoredTagDatas(element));
-        });
+        let activeTags = this.getActiveTags();
 
         document.querySelectorAll('.fa-circle-xmark').forEach(element => {
             element.addEventListener('click', () => {
                 element.parentNode.remove();
                 let tagToRemove = this.collectAndStoredTagDatas(element);
                 activeTags.forEach(tag => {
-                    if (tag.name === tagToRemove.name) {
+                    if (tag.filter === tagToRemove.filter || tag.name === tagToRemove.name) {
                         activeTags.splice(activeTags.indexOf(tag), 1);
                     }
                 });
                 let recipesFilter = new RecipesFilter(this._allRecipes);
                 recipesFilter.loadFilteredRecipesByTags(this._allRecipes, activeTags);
+
+                // let searchFunction = new SearchbarFilter(this._allRecipes, this._allRecipes);
+                // searchFunction.init();
             });
         });
     }
@@ -49,7 +52,8 @@ class TagsFilter {
         if (data.classList.contains('ingredient') || data.classList.contains('ustensil') || data.classList.contains('appliance')) {
             if (data.tagName === 'I') {
                 const tagDatas = {
-                    name: data.classList[1],
+                    name: data.parentNode.innerText,
+                    filter: data.classList[1],
                     family: data.classList[0]
                 }
                 return tagDatas;
@@ -84,7 +88,9 @@ class TagsFilter {
         });
     }
 
-    refreshTagsLists(array, filters) {
+    refreshTagsLists(array) {
+        let filters = this.getActiveTags();
+
         let filteredRecipesTag = array.map(recipe => { return {id: recipe.id, appliances: recipe.appliance, ustensils: recipe.ustensils, ingredients: recipe.ingredients.map(ingredient => ingredient.ingredient)}});
         let datas = [{
             ingredients: [],
@@ -147,8 +153,8 @@ class TagsFilter {
     }
 
     init() {
-        this.handleClick();
         this.eventOnTagInput();
+        this.handleClick();
         this.removeTag();
     }
 }

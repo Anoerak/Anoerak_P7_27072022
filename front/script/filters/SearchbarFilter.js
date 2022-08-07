@@ -41,18 +41,21 @@ class SearchbarFilter {
 
         const filteredRecipes = [...new Set(filteredRecipesPull)];
         
-        this.$gallery.innerHTML = '';
         if (filteredRecipes.length > 0) {
             const recipesFilter = new RecipesFilter(this._allDatas);
             recipesFilter.displayRecipes(filteredRecipes);
+
             const newTagsFilter = new TagsFilter(this._allDatas);
-            newTagsFilter.refreshTagsLists(filteredRecipes, []);
-            newTagsFilter.init(filteredRecipes);
+            newTagsFilter.refreshTagsLists(filteredRecipes);
+            newTagsFilter.init();
         } else {
+            this.$gallery.innerHTML = '';
             const recipesCardTemplate = new RecipeCardTemplate();
             recipesCardTemplate.createNoRecipesFound();
+
             const newTagsFilter = new TagsFilter();
-            newTagsFilter.refreshTagsLists(filteredRecipes, []);
+            newTagsFilter.refreshTagsLists(filteredRecipes);
+            
             this.$gallery.appendChild(recipesCardTemplate.createNoRecipesFound());
         }
     }

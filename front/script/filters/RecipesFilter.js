@@ -5,6 +5,7 @@ class RecipesFilter {
     }
     
     displayRecipes(recipes) {
+        this.$recipeGalleryWrapper.innerHTML = '';
         recipes.forEach(element => {
             const newRecipeCard = new RecipeCardTemplate(element);
             newRecipeCard.createRecipeCard();
@@ -12,7 +13,7 @@ class RecipesFilter {
         });
     }
 
-    loadRecipes(recipes, tags) {
+    loadRecipes(recipes) {
         this.displayRecipes(recipes);
 
         // Initiate the Searchbar Filter
@@ -21,19 +22,14 @@ class RecipesFilter {
 
         // Initiate the Tags Filter
             const newTagsFilter = new TagsFilter(this._recipes);
-            if (tags === undefined) {
-                newTagsFilter.init();  
-            } else {
-                newTagsFilter.refreshTagsLists(recipes, tags);
-                newTagsFilter.init();   
-            }
+            newTagsFilter.refreshTagsLists(recipes);
+            newTagsFilter.init();
     }
 
     loadFilteredRecipesByTags(recipes, tags) {
         this._filteredRecipes = [];
-        console.log(tags.length);
         if (tags.length === 0) {
-            this.loadRecipes(recipes, tags);
+            this.loadRecipes(this._recipes);
         } else {
             this._filteredRecipes = recipes.filter(recipe => {
                 return tags.every(tag => {
@@ -47,11 +43,9 @@ class RecipesFilter {
                 });
             });
 
-            this.$recipeGalleryWrapper.innerHTML = '';
-
             let filteredRecipesNoDuplicates = [...new Set(this._filteredRecipes)];
     
-            this.loadRecipes(filteredRecipesNoDuplicates, tags);
+            this.loadRecipes(filteredRecipesNoDuplicates);
         }
     }
 }
