@@ -304,4 +304,37 @@ body main section .card .card_content .informations .description p {
   overflow: hidden;
 }
 
+@media only screen and (max-width: 570px) {
+  body {
+    margin: 1rem;
+  }
+  body header nav #searchbar #searchbar_input {
+    padding: 0 0 0 1em;
+  }
+  body #filters {
+    display: flex;
+    flex-direction: column;
+  }
+  body #filters #appliances {
+    z-index: 4;
+  }
+  body #filters #ustensils {
+    z-index: 3;
+  }
+  body main #recipes_gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  body main #recipes_gallery .card {
+    width: 100%;
+  }
+  body main #recipes_gallery .card img {
+    width: 100%;
+  }
+  body main #recipes_gallery .card .card_content {
+    width: 89%;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

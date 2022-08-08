@@ -1,0 +1,34 @@
+@media only screen and (max-width: 570px) {   
+    body {
+        margin: 1rem;
+        & header nav #searchbar #searchbar_input {
+            padding: 0 0 0 1em;
+        }
+        & #filters {
+            display: flex;
+            flex-direction: column;
+            & #appliances {
+                z-index: 4;
+            }
+            & #ustensils {
+                z-index: 3;
+            }
+        }
+        & main {
+            & #recipes_gallery {
+                display: flex;
+                flex-direction: column;
+               align-items: center;
+               & .card {
+                width: 100%;
+                & img {
+                    width: 100%;
+                }
+                & .card_content {
+                    width: 89%;
+                }
+               }
+            }
+        }
+    }
+}
