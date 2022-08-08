@@ -21,12 +21,6 @@ class SearchbarFilter {
     }
 
     searchFunction(recipes, searchValue) {
-        // const filteredRecipesByTitles = recipes.filter(recipe => recipe.name.toLowerCase().includes(searchValue));
-        // const filteredRecipesByIngredients = recipes.filter(recipe => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchValue)));
-        // const filteredRecipesByDescription = recipes.filter(recipe => recipe.description.toLowerCase().includes(searchValue));
-        // const filteredRecipesConcat = filteredRecipesByTitles.concat(filteredRecipesByIngredients, filteredRecipesByDescription);
-        // const filteredRecipes = [...new Set(filteredRecipesConcat)];
-
         const filteredRecipes = 
             recipes.filter(recipe => recipe.name.toLowerCase().includes(searchValue) || 
             recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchValue)) || 
