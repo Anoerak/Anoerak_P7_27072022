@@ -26,19 +26,14 @@ class SearchbarFilter {
     }
 
     searchFunction(recipes, searchValue) {
-        let filteredRecipesPull = [];
-
+        let filteredRecipes = [];
         for (let i = 0; i < recipes.length; i++) {
-            if (recipes[i].name.toLowerCase().includes(searchValue)) {
-                filteredRecipesPull.push(recipes[i]);
-            } else if (recipes[i].ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchValue))) {
-                filteredRecipesPull.push(recipes[i]);
-            } else if (recipes[i].description.toLowerCase().includes(searchValue)) {
-                filteredRecipesPull.push(recipes[i]);
+            if (recipes[i].name.toLowerCase().includes(searchValue) || 
+                recipes[i].ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchValue)) || 
+                recipes[i].description.toLowerCase().includes(searchValue)) {
+                    filteredRecipes.push(recipes[i]) 
             }
         }
-
-        const filteredRecipes = [...new Set(filteredRecipesPull)];
         
         if (filteredRecipes.length > 0) {
             const recipesFilter = new RecipesFilter(this._allDatas);
