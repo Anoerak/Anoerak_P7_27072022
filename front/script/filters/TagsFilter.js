@@ -42,8 +42,11 @@ class TagsFilter {
                 let recipesFilter = new RecipesFilter(this._allRecipes);
                 recipesFilter.loadFilteredRecipesByTags(this._allRecipes, activeTags);
 
-                // let searchFunction = new SearchbarFilter(this._allRecipes, this._allRecipes);
-                // searchFunction.init();
+                let searchbarInput = document.querySelector('#searchbar_input').value;
+                if (searchbarInput.length > 0) {
+                    let searchFunction = new SearchbarFilter(this._allRecipes, this._allRecipes);
+                    searchFunction.init();
+                }
             });
         });
     }

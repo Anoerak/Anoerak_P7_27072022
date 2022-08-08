@@ -11,7 +11,7 @@ class SearchbarFilter {
 
     searchRegex() {
         const searchValue = this.$searchbar.value;
-        this.inputRegex.test(searchValue) ? this.searchFunction(this._recipes) : this.searchReset();
+        this.inputRegex.test(searchValue) ? this.searchFunction(this._recipes, searchValue) : this.searchReset();
     }
 
     searchReset() {
@@ -25,8 +25,7 @@ class SearchbarFilter {
         newTagsFilter.refreshTagsLists(this._recipes, []);
     }
 
-    searchFunction(recipes) {
-        const searchValue = this.$searchbar.value.toLowerCase();
+    searchFunction(recipes, searchValue) {
         let filteredRecipesPull = [];
 
         for (let i = 0; i < recipes.length; i++) {
