@@ -11,18 +11,29 @@ class SearchbarFilter {
 
     searchRegex() {
         const searchValue = this.$searchbar.value;
-        this.inputRegex.test(searchValue) ? this.searchFunction(this._recipes, searchValue) : this.searchReset();
+        this.inputRegex.test(searchValue) ? this.searchFunction(this._recipes, searchValue) : this.searchReset(searchValue);
     }
 
-    searchReset() {
-        this.$gallery.innerHTML = '';
-        
-        const recipesFilter = new RecipesFilter(this._allDatas);
-        recipesFilter.displayRecipes(this._recipes);
+    searchReset(searchValue) {
+        if (searchValue.length < 1) {
+            this.$gallery.innerHTML = '';
 
-        const newTagsFilter = new TagsFilter(this._allDatas);
-        newTagsFilter.init(this._recipes);
-        newTagsFilter.refreshTagsLists(this._recipes, []);
+            const recipesFilter = new RecipesFilter(this._allDatas);
+            recipesFilter.displayRecipes(this._recipes);
+
+            const newTagsFilter = new TagsFilter(this._allDatas);
+            newTagsFilter.refreshTagsLists(this._allDatas);
+            newTagsFilter.init();
+        } else if (1 <= searchValue.length < 3) {
+            this.$gallery.innerHTML = '';
+            const recipesCardTemplate = new RecipeCardTemplate();
+            recipesCardTemplate.createMinimumSearchLength();
+
+            const newTagsFilter = new TagsFilter(this._allDatas);
+            newTagsFilter.refreshTagsLists([]);
+
+            this.$gallery.appendChild(recipesCardTemplate.createMinimumSearchLength());
+        }
     }
 
     searchFunction(recipes, searchValue) {

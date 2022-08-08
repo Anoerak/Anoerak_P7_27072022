@@ -39,14 +39,14 @@ class TagsFilter {
                         activeTags.splice(activeTags.indexOf(tag), 1);
                     }
                 });
-                let recipesFilter = new RecipesFilter(this._allRecipes);
-                recipesFilter.loadFilteredRecipesByTags(this._allRecipes, activeTags);
-
                 let searchbarInput = document.querySelector('#searchbar_input').value;
                 if (searchbarInput.length > 0) {
                     let searchFunction = new SearchbarFilter(this._allRecipes, this._allRecipes);
                     searchFunction.init();
-                }
+                };
+                let recipesFilter = new RecipesFilter(this._allRecipes);
+                recipesFilter.loadFilteredRecipesByTags(this._allRecipes, activeTags);
+
             });
         });
     }

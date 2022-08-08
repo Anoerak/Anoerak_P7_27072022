@@ -71,4 +71,13 @@ class RecipeCardTemplate {
         `;
         return noRecipesFound;
     }
+
+    createMinimumSearchLength() {
+        const minimumSearchLength = document.createElement('div');
+        minimumSearchLength.classList.add('minimum_search_length');
+        minimumSearchLength.innerHTML = `
+            <p>Votre recherche doit contenir au moins 3 caractères</p>
+        `;
+        return minimumSearchLength;
+    }
 }
