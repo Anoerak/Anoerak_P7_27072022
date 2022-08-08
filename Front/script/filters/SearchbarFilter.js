@@ -11,7 +11,7 @@ class SearchbarFilter {
 
     searchRegex() {
         const searchValue = this.$searchbar.value;
-        this.inputRegex.test(searchValue) ? this.searchFunction(this._recipes) : this.searchReset();
+        this.inputRegex.test(searchValue) ? this.searchFunction(this._recipes, searchValue) : this.searchReset();
     }
 
     searchReset() {
@@ -20,13 +20,19 @@ class SearchbarFilter {
         recipesFilter.displayRecipes(this._recipes);
     }
 
-    searchFunction(recipes) {
-        const searchValue = this.$searchbar.value.toLowerCase();
-        const filteredRecipesByTitles = recipes.filter(recipe => recipe.name.toLowerCase().includes(searchValue));
-        const filteredRecipesByIngredients = recipes.filter(recipe => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchValue)));
-        const filteredRecipesByDescription = recipes.filter(recipe => recipe.description.toLowerCase().includes(searchValue));
-        const filteredRecipesConcat = filteredRecipesByTitles.concat(filteredRecipesByIngredients, filteredRecipesByDescription);
-        const filteredRecipes = [...new Set(filteredRecipesConcat)];
+    searchFunction(recipes, searchValue) {
+        // const filteredRecipesByTitles = recipes.filter(recipe => recipe.name.toLowerCase().includes(searchValue));
+        // const filteredRecipesByIngredients = recipes.filter(recipe => recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchValue)));
+        // const filteredRecipesByDescription = recipes.filter(recipe => recipe.description.toLowerCase().includes(searchValue));
+        // const filteredRecipesConcat = filteredRecipesByTitles.concat(filteredRecipesByIngredients, filteredRecipesByDescription);
+        // const filteredRecipes = [...new Set(filteredRecipesConcat)];
+
+        const filteredRecipes = 
+            recipes.filter(recipe => recipe.name.toLowerCase().includes(searchValue) || 
+            recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(searchValue)) || 
+            recipe.description.toLowerCase().includes(searchValue));
+
+
         this.$gallery.innerHTML = '';
         if (filteredRecipes.length > 0) {
             const recipesFilter = new RecipesFilter(filteredRecipes);
